@@ -300,7 +300,9 @@ html.nav-open {
   margin: 0;
   padding: 0;
   list-style: none;
-  animation: marquee 24s linear infinite;
+  /* Same colour as the section, so white-background logos can blend into it */
+  background: var(--color-clients);
+  animation: marquee 32s linear infinite;
 }
 
 .clients__marquee:hover .clients__track {
@@ -340,6 +342,10 @@ html.nav-open {
 /* Maybank is a wide solid banner, so it gets a wider slot and is centred vertically */
 .logo--maybank { width: 130px; }
 .logo--maybank img { left: 10px; width: 110px; top: 27px; }
+
+/* KPJ's file has a white background; multiply blends the white into the cream */
+.logo--kpj { width: 180px; }
+.logo--kpj img { left: 10px; width: 160px; top: 28px; mix-blend-mode: multiply; }
 
 .visually-hidden {
   position: absolute;
