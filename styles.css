@@ -300,7 +300,7 @@ html.nav-open {
   margin: 0;
   padding: 0;
   list-style: none;
-  animation: marquee 18s linear infinite;
+  animation: marquee 24s linear infinite;
 }
 
 .clients__marquee:hover .clients__track {
@@ -336,6 +336,10 @@ html.nav-open {
 .logo--fgv img { left: 12px; width: 76px; top: 10px; }
 .logo--tnb img { left: 21px; width: 60px; top: 11px; }
 .logo--air img { left: 25px; width: 50px; top: 10px; }
+
+/* Maybank is a wide solid banner, so it gets a wider slot and is centred vertically */
+.logo--maybank { width: 130px; }
+.logo--maybank img { left: 10px; width: 110px; top: 27px; }
 
 .visually-hidden {
   position: absolute;
