@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dulang&amp;Kopi</title>
+  <meta name="description" content="Dulang&Kopi — Rasa Melayu untuk semua.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand type-title3-emphasized" href="index.html" aria-current="page">Dulang&amp;Kopi</a>
+    <button class="menu-toggle" type="button" aria-label="Buka menu" aria-expanded="false" aria-controls="site-nav">
+      <img src="assets/menu.svg" width="24" height="24" alt="">
+    </button>
+    <div class="nav-backdrop" aria-hidden="true"></div>
+    <nav id="site-nav" class="site-nav" aria-label="Navigasi utama">
+      <ul class="site-nav__list">
+        <li><a class="site-nav__link type-body" href="tentang.html">Tentang D&amp;K</a></li>
+        <li><a class="site-nav__link type-body" href="#tempah-makanan">Tempah Makanan</a></li>
+        <li><a class="site-nav__link type-body" href="#tempah-katering">Tempah Katering</a></li>
+        <li><a class="site-nav__link type-body" href="#produk">Produk D&amp;K</a></li>
+        <li><a class="site-nav__link type-body" href="#pelanggan">Pelanggan Kami</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero__band" aria-hidden="true"></div>
+      <div class="hero__content">
+        <div class="hero__titles">
+          <h1 class="hero__title type-title1-emphasized">Rasa Melayu untuk semua</h1>
+          <p class="hero__jawi type-footnote" lang="ms-Arab" dir="rtl">راسا ملايو اونتک سمواء</p>
+        </div>
+        <a class="btn-outline type-footnote" href="#menu">Lihat Menu</a>
+      </div>
+      <div class="hero__media">
+        <img src="assets/hero.png" width="1086" height="1448"
+             alt="Lukisan cat air hadapan kedai Dulang&amp;Kopi dengan papan tanda Menu Hari Ini">
+      </div>
+    </section>
+
+    <section id="pelanggan" class="clients" aria-labelledby="clients-title">
+      <h2 id="clients-title" class="clients__title type-callout">Pernah menjadi pilihan</h2>
+      <div class="clients__marquee">
+        <ul class="clients__track">
+          <li class="logo logo--tm"><img src="assets/logos/tm.png" alt="Telekom Malaysia"></li>
+          <li class="logo logo--fgv"><img src="assets/logos/fgv.png" alt="FGV"></li>
+          <li class="logo logo--tnb"><img src="assets/logos/tnb.png" alt="Tenaga Nasional Berhad"></li>
+          <li class="logo logo--air"><img src="assets/logos/air-selangor.png" alt="Air Selangor"></li>
+          <!-- Duplicate set for a seamless loop -->
+          <li class="logo logo--tm" aria-hidden="true"><img src="assets/logos/tm.png" alt=""></li>
+          <li class="logo logo--fgv" aria-hidden="true"><img src="assets/logos/fgv.png" alt=""></li>
+          <li class="logo logo--tnb" aria-hidden="true"><img src="assets/logos/tnb.png" alt=""></li>
+          <li class="logo logo--air" aria-hidden="true"><img src="assets/logos/air-selangor.png" alt=""></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <script src="nav.js"></script>
+</body>
+</html>
