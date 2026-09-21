@@ -140,6 +140,10 @@ html.nav-open {
   top: calc(100% + 3px);
   right: 16px;
   width: min(274px, calc(100vw - 32px));
+  /* The page can't scroll while the menu is open, so on short screens
+     (e.g. a phone in landscape) the panel scrolls itself instead */
+  max-height: calc(100dvh - 62px - 3px - 16px);
+  overflow-y: auto;
   padding: 4px;
   border-radius: 16px;
   background: #fff;
