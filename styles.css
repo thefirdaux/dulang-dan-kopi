@@ -302,7 +302,7 @@ html.nav-open {
   list-style: none;
   /* Same colour as the section, so white-background logos can blend into it */
   background: var(--color-clients);
-  animation: marquee 32s linear infinite;
+  animation: marquee 36.5s linear infinite;
 }
 
 .clients__marquee:hover .clients__track {
@@ -343,9 +343,10 @@ html.nav-open {
 .logo--maybank { width: 130px; }
 .logo--maybank img { left: 10px; width: 110px; top: 27px; }
 
-/* KPJ's file has a white background; multiply blends the white into the cream */
+/* KPJ's and Habib's files have white backgrounds; multiply blends the white into the cream */
 .logo--kpj { width: 180px; }
 .logo--kpj img { left: 10px; width: 160px; top: 28px; mix-blend-mode: multiply; }
+.logo--habib img { left: 10px; width: 80px; top: 20px; mix-blend-mode: multiply; }
 
 .visually-hidden {
   position: absolute;
