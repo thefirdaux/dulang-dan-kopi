@@ -6,8 +6,11 @@ Static HTML/CSS/JS site (no build step), implemented from the Figma file
 ## Run locally
 
 ```bash
-python3 -m http.server 5173
+python3 serve.py
 ```
+
+`serve.py` is a plain static server that sends `Cache-Control: no-store`, so
+phones never show stale files while previewing.
 
 Then open http://localhost:5173. To preview on an iPhone on the same Wi-Fi,
 open `http://<your-mac-ip>:5173` (find the IP with `ipconfig getifaddr en0`).
