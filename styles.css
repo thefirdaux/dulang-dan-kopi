@@ -182,7 +182,7 @@ html.nav-open {
   display: flex;
   flex-direction: column;
   width: var(--drawer-width);
-  padding: calc(28px + var(--nav-overhang)) 16px calc(51px + 100lvh - 100dvh + var(--nav-overhang));
+  padding: calc(18px + var(--nav-overhang)) 16px calc(51px + 100lvh - 100dvh + var(--nav-overhang));
   overflow-y: auto;
   overscroll-behavior: contain;
   background: var(--color-hero-band);
@@ -209,7 +209,9 @@ html.nav-open {
   }
 }
 
-/* 24px icon as in the design, with a 44px tap area around it */
+/* 24px icon with a 44px tap area around it. It sits 18px from the top and 16px
+   from the right, the same spot as the menu (hamburger) button in the header,
+   so opening and closing the menu happens in one place. */
 .site-nav__close {
   flex: none;
   align-self: flex-end;
@@ -223,7 +225,7 @@ html.nav-open {
 }
 
 .site-nav__list {
-  margin: 10px 0 0;   /* first row starts 72px from the top, as in the design */
+  margin: 20px 0 0;   /* first row starts 72px from the top, as in the design */
   padding: 0;
   list-style: none;
 }
