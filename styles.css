@@ -3,9 +3,11 @@
   --color-hero-band: #f9efe0;
   --color-clients: #fcf5e7;
   --color-text: #000;
+  --color-rule: #242424;    /* 0.5px dividers in the menu drawer */
   --color-paper: #faf2e2;   /* paper colour of the storefront illustration */
 
   --drawer-width: 209px;
+  --nav-overhang: 120px;    /* how far the drawer reaches past the screen edges (see .nav-backdrop) */
 
   /* SF Pro, as set up in Figma. Apple devices use the built-in system copy;
      SF Pro can't be embedded as a web font (Apple's licence), so other
@@ -134,9 +136,29 @@ html.nav-open {
   overflow: hidden;
 }
 
-.nav-backdrop {
+/* While open, the dim layer and the drawer are positioned in the page at the
+   current scroll position (nav.js sets --nav-top) rather than fixed. On iPhone
+   (iOS 26), Safari clips fixed elements at the edge of its toolbars and paints
+   the strips behind them itself, but it does draw normal page content behind
+   its floating toolbar, so these extend --nav-overhang past the screen edges.
+   While closed they stay fixed, so the off-screen drawer never widens the page. */
+.nav-backdrop,
+.site-nav {
   position: fixed;
-  inset: 0;
+  top: 0;
+}
+
+.nav-backdrop.is-open,
+.site-nav.is-open {
+  position: absolute;
+  top: var(--nav-top, 0px);
+}
+
+.nav-backdrop {
+  right: 0;
+  left: 0;
+  margin-top: calc(-1 * var(--nav-overhang));
+  height: calc(100lvh + 2 * var(--nav-overhang));
   z-index: 20;
   background: rgb(0 0 0 / 0.25);
   opacity: 0;
@@ -150,18 +172,19 @@ html.nav-open {
   transition: opacity 0.25s ease;
 }
 
-/* Full screen height; "Bahasa" is pinned 51px from the bottom as in the design */
+/* Full screen height plus the overhang; "Bahasa" is kept 51px above the visible
+   bottom (100dvh), which is above Safari's toolbar when it's showing. */
 .site-nav {
-  position: fixed;
-  top: 0;
   right: 0;
-  bottom: 0;
+  margin-top: calc(-1 * var(--nav-overhang));
+  height: calc(100lvh + 2 * var(--nav-overhang));
   z-index: 30;
   display: flex;
   flex-direction: column;
   width: var(--drawer-width);
-  padding: 11px 16px 51px;
+  padding: calc(28px + var(--nav-overhang)) 16px calc(51px + 100lvh - 100dvh + var(--nav-overhang));
   overflow-y: auto;
+  overscroll-behavior: contain;
   background: var(--color-hero-band);
   transform: translateX(100%);
   visibility: hidden;
@@ -179,39 +202,118 @@ html.nav-open {
   .nav-backdrop,
   .nav-backdrop.is-open,
   .site-nav,
-  .site-nav.is-open {
+  .site-nav.is-open,
+  .nav-group__panel,
+  .nav-group__arrow {
     transition: none;
   }
 }
 
+/* 24px icon as in the design, with a 44px tap area around it */
 .site-nav__close {
   flex: none;
   align-self: flex-end;
-  width: 32px;
-  height: 32px;
-  padding: 0;
+  width: 44px;
+  height: 44px;
+  margin: -10px -10px 0 0;
+  padding: 10px;
   border: 0;
-  border-radius: 50%;
   background: none;
   cursor: pointer;
 }
 
 .site-nav__list {
-  margin: 19px 0 0;
+  margin: 10px 0 0;   /* first row starts 72px from the top, as in the design */
   padding: 0;
   list-style: none;
 }
 
-/* Rows are 56px with a 0.5px black rule; text on the left, arrow (if any) on the right */
+/* ---- Dropdown groups (Figma components "Frame 34/35/36": Default = closed,
+   Variant2 = open). 52px header, 40px sub-rows, 0.5px rule under the group.
+   Rules are drawn as an inset shadow rather than a border so rows stay on whole
+   pixels; Safari on iPhone skips 0.5px borders that land on a half pixel. ---- */
+.nav-group {
+  position: relative;
+}
+
+/* Drawn above the rows so a hovered header's background doesn't cover it */
+.nav-group::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  box-shadow: inset 0 -0.5px 0 var(--color-rule);
+  pointer-events: none;
+}
+
+.nav-group__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 52px;
+  padding: 0 8px;
+  border: 0;
+  background: none;
+  color: inherit;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.nav-group__arrow {
+  flex: none;
+  transition: transform 0.25s ease;
+}
+
+/* Open state: the arrow flips to point up */
+.nav-group__header[aria-expanded="true"] .nav-group__arrow {
+  transform: scaleY(-1);
+}
+
+/* Height animates from 0 to the content's height */
+.nav-group__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition: grid-template-rows 0.25s ease, visibility 0s linear 0.25s;
+}
+
+.nav-group.is-open .nav-group__panel {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  transition: grid-template-rows 0.25s ease;
+}
+
+.nav-group__items {
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  list-style: none;
+}
+
+.nav-group__link {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 6px 8px;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Plain rows (Pelanggan Kami, Hubungi Kami, Bahasa) match the group headers */
 .site-nav__link {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: 56px;
-  padding: 12px 10px;
+  height: 52px;
+  padding: 0 8px;
   border: 0;
-  border-bottom: 0.5px solid var(--color-text);
+  box-shadow: inset 0 -0.5px 0 var(--color-rule);
   background: none;
   color: inherit;
   font-family: inherit;
@@ -219,20 +321,18 @@ html.nav-open {
   text-decoration: none;
 }
 
+.nav-group__header:hover,
+.nav-group__header:focus-visible,
+.nav-group__link:hover,
+.nav-group__link:focus-visible,
 .site-nav__link:hover,
 .site-nav__link:focus-visible {
   background: var(--color-clients);
 }
 
-/* Arrows are shown as designed; the sub-menus they point to aren't built yet */
-.site-nav__arrow {
-  flex: none;
-}
-
 /* "Bahasa" sits at the bottom of the drawer, icon on the left */
 .site-nav__language {
   flex: none;
-  justify-content: space-between;
   margin-top: auto;
   cursor: pointer;
 }

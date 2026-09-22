@@ -8,6 +8,10 @@
   const isOpen = () => nav.classList.contains('is-open');
 
   const setOpen = (open) => {
+    if (open) {
+      // Drawer and dim layer live in the page, so line them up with what's on screen
+      document.documentElement.style.setProperty('--nav-top', `${window.scrollY}px`);
+    }
     nav.classList.toggle('is-open', open);
     backdrop.classList.toggle('is-open', open);
     document.documentElement.classList.toggle('nav-open', open);
@@ -24,6 +28,15 @@
   toggle.addEventListener('click', () => setOpen(!isOpen()));
   closeButton.addEventListener('click', () => setOpen(false));
   backdrop.addEventListener('click', () => setOpen(false));
+
+  // Dropdown groups: each header opens/closes its own list
+  nav.querySelectorAll('.nav-group__header').forEach((header) => {
+    header.addEventListener('click', () => {
+      const open = header.getAttribute('aria-expanded') !== 'true';
+      header.setAttribute('aria-expanded', String(open));
+      header.closest('.nav-group').classList.toggle('is-open', open);
+    });
+  });
 
   // Close after choosing a link
   nav.addEventListener('click', (e) => {
