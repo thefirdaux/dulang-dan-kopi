@@ -4,6 +4,8 @@
   --color-clients: #fcf5e7;
   --color-text: #000;
 
+  --drawer-width: 209px;
+
   /* SF Pro, as set up in Figma. Apple devices use the built-in system copy;
      SF Pro can't be embedded as a web font (Apple's licence), so other
      platforms fall back to their own system UI font. */
@@ -113,85 +115,120 @@ img {
   cursor: pointer;
 }
 
-/* Dims the page (header included) while the navigation panel is open */
+/* ---------- Navigation drawer ----------
+   Slides in from the right and pushes the page left by its own width.
+   The visible part of the page is dimmed; tapping it closes the drawer. */
+
+.page {
+  transition: transform 0.25s ease;
+}
+
+html.nav-open .page {
+  transform: translateX(calc(-1 * var(--drawer-width)));
+}
+
+/* Stop the page scrolling behind the open drawer */
+html.nav-open {
+  overflow: hidden;
+}
+
 .nav-backdrop {
   position: fixed;
   inset: 0;
+  z-index: 20;
   background: rgb(0 0 0 / 0.25);
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.15s ease, visibility 0s linear 0.15s;
+  transition: opacity 0.25s ease, visibility 0s linear 0.25s;
 }
 
 .nav-backdrop.is-open {
   opacity: 1;
   visibility: visible;
-  transition: opacity 0.15s ease;
+  transition: opacity 0.25s ease;
 }
 
-/* Stop the page scrolling behind the open menu */
-html.nav-open {
-  overflow: hidden;
-}
-
-/* Navigation panel — drops down 3px below the header, lined up with the menu button */
+/* Bottom padding is 141px as in the design (854px-tall screen), shrinking on
+   shorter screens so "Bahasa" moves up rather than off the bottom */
 .site-nav {
-  position: absolute;
-  top: calc(100% + 3px);
-  right: 16px;
-  width: min(274px, calc(100vw - 32px));
-  /* The page can't scroll while the menu is open, so on short screens
-     (e.g. a phone in landscape) the panel scrolls itself instead */
-  max-height: calc(100dvh - 62px - 3px - 16px);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  width: var(--drawer-width);
+  padding: 15px 16px clamp(24px, calc(100dvh - 713px), 141px);
   overflow-y: auto;
-  padding: 4px;
-  border-radius: 16px;
-  background: #fff;
-  box-shadow: 0 8px 24px rgb(0 0 0 / 0.08);
-  opacity: 0;
+  background: var(--color-hero-band);
+  transform: translateX(100%);
   visibility: hidden;
-  transform: translateY(-4px);
-  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0s linear 0.15s;
+  transition: transform 0.25s ease, visibility 0s linear 0.25s;
 }
 
 .site-nav.is-open {
-  opacity: 1;
-  visibility: visible;
   transform: none;
-  transition: opacity 0.15s ease, transform 0.15s ease;
+  visibility: visible;
+  transition: transform 0.25s ease;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .site-nav,
-  .site-nav.is-open,
+  .page,
   .nav-backdrop,
-  .nav-backdrop.is-open {
+  .nav-backdrop.is-open,
+  .site-nav,
+  .site-nav.is-open {
     transition: none;
   }
 }
 
+.site-nav__close {
+  flex: none;
+  align-self: flex-end;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+}
+
 .site-nav__list {
-  margin: 0;
+  margin: 15px 0 0;
   padding: 0;
   list-style: none;
 }
 
-.site-nav__list li:not(:last-child) .site-nav__link {
-  border-bottom: 1px solid var(--color-hero-band);
-}
-
+/* Rows are 56px with a 0.5px black rule; text sits on the right */
 .site-nav__link {
   display: flex;
   align-items: center;
-  height: 64px;
-  padding: 10px;
+  justify-content: flex-end;
+  width: 100%;
+  height: 56px;
+  padding: 12px 10px;
+  border: 0;
+  border-bottom: 0.5px solid var(--color-text);
+  background: none;
   color: inherit;
+  font-family: inherit;
+  text-align: right;
   text-decoration: none;
 }
 
 .site-nav__link:hover,
 .site-nav__link:focus-visible {
   background: var(--color-clients);
+}
+
+/* "Bahasa" sits at the bottom of the drawer, icon on the left */
+.site-nav__language {
+  flex: none;
+  justify-content: space-between;
+  margin-top: auto;
+  cursor: pointer;
 }
 
 /* Hero */

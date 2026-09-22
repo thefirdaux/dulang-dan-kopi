@@ -19,8 +19,9 @@ open `http://<your-mac-ip>:5173` (find the IP with `ipconfig getifaddr en0`).
 | `index.html` | Homepage (hero, "Pernah menjadi pilihan" logos) | `1:2` |
 | `tentang.html` | Tentang D&K | `10:76` |
 
-The header, ☰ navigation panel (Figma node `10:65`) and its dimmed backdrop are
-repeated in both pages; the open/close behaviour lives in `nav.js`.
+The header and the ☰ navigation drawer (Figma node `19:251`) are repeated in
+both pages. The drawer slides in from the right, pushes the page left and dims
+it; the open/close behaviour lives in `nav.js`.
 
 ## Styles
 
@@ -32,6 +33,6 @@ repeated in both pages; the open/close behaviour lives in `nav.js`.
 
 ## Not built yet
 
-Menu links for Tempah Makanan, Tempah Katering and Produk D&K point to
-placeholder anchors, and "Lihat Menu" points to `#menu`; those pages/sections
-haven't been designed yet.
+Menu links for Tempah, Produk D&K and Hubungi Kami point to placeholder
+anchors, "Bahasa" does nothing yet, and "Lihat Menu" points to `#menu`; those
+pages/sections haven't been designed yet.

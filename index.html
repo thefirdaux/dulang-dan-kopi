@@ -8,63 +8,73 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="site-header">
-    <a class="brand type-title3-emphasized" href="index.html" aria-current="page">Dulang&amp;Kopi</a>
-    <button class="menu-toggle" type="button" aria-label="Buka menu" aria-expanded="false" aria-controls="site-nav">
-      <img src="assets/menu.svg" width="24" height="24" alt="">
-    </button>
-    <div class="nav-backdrop" aria-hidden="true"></div>
-    <nav id="site-nav" class="site-nav" aria-label="Navigasi utama">
-      <ul class="site-nav__list">
-        <li><a class="site-nav__link type-body" href="tentang.html">Tentang D&amp;K</a></li>
-        <li><a class="site-nav__link type-body" href="#tempah-makanan">Tempah Makanan</a></li>
-        <li><a class="site-nav__link type-body" href="#tempah-katering">Tempah Katering</a></li>
-        <li><a class="site-nav__link type-body" href="#produk">Produk D&amp;K</a></li>
-        <li><a class="site-nav__link type-body" href="#pelanggan">Pelanggan Kami</a></li>
-        <li><a class="site-nav__link type-body" href="#hubungi">Hubungi Kami</a></li>
-      </ul>
-    </nav>
-  </header>
+  <div class="page">
+    <header class="site-header">
+      <a class="brand type-title3-emphasized" href="index.html" aria-current="page">Dulang&amp;Kopi</a>
+      <button class="menu-toggle" type="button" aria-label="Buka menu" aria-expanded="false" aria-controls="site-nav">
+        <img src="assets/menu.svg" width="24" height="24" alt="">
+      </button>
+    </header>
 
-  <main>
-    <section class="hero">
-      <div class="hero__band" aria-hidden="true"></div>
-      <div class="hero__content">
-        <div class="hero__titles">
-          <h1 class="hero__title type-title1-emphasized">Rasa Melayu untuk semua</h1>
-          <p class="hero__jawi type-footnote" lang="ms-Arab" dir="rtl">راسا ملايو اونتک سمواء</p>
+    <main>
+      <section class="hero">
+        <div class="hero__band" aria-hidden="true"></div>
+        <div class="hero__content">
+          <div class="hero__titles">
+            <h1 class="hero__title type-title1-emphasized">Rasa Melayu untuk semua</h1>
+            <p class="hero__jawi type-footnote" lang="ms-Arab" dir="rtl">راسا ملايو اونتک سمواء</p>
+          </div>
+          <a class="btn-outline type-footnote" href="#menu">Lihat Menu</a>
         </div>
-        <a class="btn-outline type-footnote" href="#menu">Lihat Menu</a>
-      </div>
-      <div class="hero__media">
-        <img src="assets/hero.png" width="1086" height="1448"
-             alt="Lukisan cat air hadapan kedai Dulang&amp;Kopi dengan papan tanda Menu Hari Ini">
-      </div>
-    </section>
+        <div class="hero__media">
+          <img src="assets/hero.png" width="1086" height="1448"
+               alt="Lukisan cat air hadapan kedai Dulang&amp;Kopi dengan papan tanda Menu Hari Ini">
+        </div>
+      </section>
 
-    <section id="pelanggan" class="clients" aria-labelledby="clients-title">
-      <h2 id="clients-title" class="clients__title type-callout">Pernah menjadi pilihan</h2>
-      <div class="clients__marquee">
-        <ul class="clients__track">
-          <li class="logo logo--tm"><img src="assets/logos/tm.png" alt="Telekom Malaysia"></li>
-          <li class="logo logo--fgv"><img src="assets/logos/fgv.png" alt="FGV"></li>
-          <li class="logo logo--tnb"><img src="assets/logos/tnb.png" alt="Tenaga Nasional Berhad"></li>
-          <li class="logo logo--air"><img src="assets/logos/air-selangor.png" alt="Air Selangor"></li>
-          <li class="logo logo--maybank"><img src="assets/logos/maybank.png" alt="Maybank"></li>
-          <li class="logo logo--kpj"><img src="assets/logos/kpj-ampang-puteri.png" alt="KPJ Ampang Puteri Specialist Hospital"></li>
-          <li class="logo logo--habib"><img src="assets/logos/habib.png" alt="Habib"></li>
-          <!-- Duplicate set for a seamless loop -->
-          <li class="logo logo--tm" aria-hidden="true"><img src="assets/logos/tm.png" alt=""></li>
-          <li class="logo logo--fgv" aria-hidden="true"><img src="assets/logos/fgv.png" alt=""></li>
-          <li class="logo logo--tnb" aria-hidden="true"><img src="assets/logos/tnb.png" alt=""></li>
-          <li class="logo logo--air" aria-hidden="true"><img src="assets/logos/air-selangor.png" alt=""></li>
-          <li class="logo logo--maybank" aria-hidden="true"><img src="assets/logos/maybank.png" alt=""></li>
-          <li class="logo logo--kpj" aria-hidden="true"><img src="assets/logos/kpj-ampang-puteri.png" alt=""></li>
-          <li class="logo logo--habib" aria-hidden="true"><img src="assets/logos/habib.png" alt=""></li>
-        </ul>
-      </div>
-    </section>
-  </main>
+      <section id="pelanggan" class="clients" aria-labelledby="clients-title">
+        <h2 id="clients-title" class="clients__title type-callout">Pernah menjadi pilihan</h2>
+        <div class="clients__marquee">
+          <ul class="clients__track">
+            <li class="logo logo--tm"><img src="assets/logos/tm.png" alt="Telekom Malaysia"></li>
+            <li class="logo logo--fgv"><img src="assets/logos/fgv.png" alt="FGV"></li>
+            <li class="logo logo--tnb"><img src="assets/logos/tnb.png" alt="Tenaga Nasional Berhad"></li>
+            <li class="logo logo--air"><img src="assets/logos/air-selangor.png" alt="Air Selangor"></li>
+            <li class="logo logo--maybank"><img src="assets/logos/maybank.png" alt="Maybank"></li>
+            <li class="logo logo--kpj"><img src="assets/logos/kpj-ampang-puteri.png" alt="KPJ Ampang Puteri Specialist Hospital"></li>
+            <li class="logo logo--habib"><img src="assets/logos/habib.png" alt="Habib"></li>
+            <!-- Duplicate set for a seamless loop -->
+            <li class="logo logo--tm" aria-hidden="true"><img src="assets/logos/tm.png" alt=""></li>
+            <li class="logo logo--fgv" aria-hidden="true"><img src="assets/logos/fgv.png" alt=""></li>
+            <li class="logo logo--tnb" aria-hidden="true"><img src="assets/logos/tnb.png" alt=""></li>
+            <li class="logo logo--air" aria-hidden="true"><img src="assets/logos/air-selangor.png" alt=""></li>
+            <li class="logo logo--maybank" aria-hidden="true"><img src="assets/logos/maybank.png" alt=""></li>
+            <li class="logo logo--kpj" aria-hidden="true"><img src="assets/logos/kpj-ampang-puteri.png" alt=""></li>
+            <li class="logo logo--habib" aria-hidden="true"><img src="assets/logos/habib.png" alt=""></li>
+          </ul>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="nav-backdrop" aria-hidden="true"></div>
+  <nav id="site-nav" class="site-nav" aria-label="Navigasi utama">
+    <button class="site-nav__close" type="button" aria-label="Tutup menu">
+      <img src="assets/close.svg" width="32" height="32" alt="">
+    </button>
+    <ul class="site-nav__list">
+      <li><a class="site-nav__link type-body" href="tentang.html">Tentang Kami</a></li>
+      <li><a class="site-nav__link type-body" href="#tempah">Tempah</a></li>
+      <li><a class="site-nav__link type-body" href="#produk">Produk D&amp;K</a></li>
+      <li><a class="site-nav__link type-body" href="#pelanggan">Pelanggan Kami</a></li>
+      <li><a class="site-nav__link type-body" href="#hubungi">Hubungi Kami</a></li>
+    </ul>
+    <!-- Placeholder: language options not designed yet -->
+    <button class="site-nav__link site-nav__language type-body" type="button">
+      <img src="assets/translate.svg" width="32" height="32" alt="">
+      <span>Bahasa</span>
+    </button>
+  </nav>
 
   <script src="nav.js"></script>
 </body>
