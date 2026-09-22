@@ -395,6 +395,7 @@ html.nav-open {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 10px;
   width: 175px;
   padding: 10px;
   border: 1px solid currentColor;
@@ -408,6 +409,23 @@ html.nav-open {
 .btn-outline:focus-visible {
   background: var(--color-text);
   color: var(--color-header);
+}
+
+/* 24px food-cover icon (assets/menu-cloche.svg), drawn as a mask so it can
+   switch to cream with the text when the button turns black on hover */
+.btn-outline__icon {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  background: #242424;
+  -webkit-mask: url("assets/menu-cloche.svg") center / 24px 24px no-repeat;
+  mask: url("assets/menu-cloche.svg") center / 24px 24px no-repeat;
+  transition: background-color 0.2s;
+}
+
+.btn-outline:hover .btn-outline__icon,
+.btn-outline:focus-visible .btn-outline__icon {
+  background: currentColor;
 }
 
 /* Image frame is 402×530 in the design; the image itself is 402×536, top-anchored and clipped. */
