@@ -27,8 +27,12 @@
           <a class="btn-outline type-footnote" href="#menu">Lihat Menu</a>
         </div>
         <div class="hero__media">
-          <img src="assets/hero.png" width="1086" height="1448"
-               alt="Lukisan cat air hadapan kedai Dulang&amp;Kopi dengan papan tanda Menu Hari Ini">
+          <picture>
+            <!-- Landscape illustration for tablet and desktop -->
+            <source media="(min-width: 768px)" srcset="assets/hero-wide.webp" width="1487" height="1058">
+            <img src="assets/hero.png" width="1086" height="1448"
+                 alt="Lukisan cat air hadapan kedai Dulang&amp;Kopi dengan papan tanda Menu Hari Ini">
+          </picture>
         </div>
       </section>
 
@@ -36,22 +40,30 @@
         <h2 id="clients-title" class="clients__title type-callout">Pernah menjadi pilihan</h2>
         <div class="clients__marquee">
           <ul class="clients__track">
-            <li class="logo logo--tm"><img src="assets/logos/tm.png" alt="Telekom Malaysia"></li>
-            <li class="logo logo--fgv"><img src="assets/logos/fgv.png" alt="FGV"></li>
-            <li class="logo logo--tnb"><img src="assets/logos/tnb.png" alt="Tenaga Nasional Berhad"></li>
-            <li class="logo logo--air"><img src="assets/logos/air-selangor.png" alt="Air Selangor"></li>
-            <li class="logo logo--maybank"><img src="assets/logos/maybank.png" alt="Maybank"></li>
-            <li class="logo logo--kpj"><img src="assets/logos/kpj-ampang-puteri.png" alt="KPJ Ampang Puteri Specialist Hospital"></li>
-            <li class="logo logo--habib"><img src="assets/logos/habib.png" alt="Habib"></li>
-            <!-- Duplicate set for a seamless loop -->
-            <li class="logo logo--tm" aria-hidden="true"><img src="assets/logos/tm.png" alt=""></li>
-            <li class="logo logo--fgv" aria-hidden="true"><img src="assets/logos/fgv.png" alt=""></li>
-            <li class="logo logo--tnb" aria-hidden="true"><img src="assets/logos/tnb.png" alt=""></li>
-            <li class="logo logo--air" aria-hidden="true"><img src="assets/logos/air-selangor.png" alt=""></li>
-            <li class="logo logo--maybank" aria-hidden="true"><img src="assets/logos/maybank.png" alt=""></li>
-            <li class="logo logo--kpj" aria-hidden="true"><img src="assets/logos/kpj-ampang-puteri.png" alt=""></li>
-            <li class="logo logo--habib" aria-hidden="true"><img src="assets/logos/habib.png" alt=""></li>
-          </ul>
+          <li class="logo logo--tm"><img src="assets/logos/tm.png" width="86" height="40" alt="Telekom Malaysia"></li>
+          <li class="logo logo--fgv"><img src="assets/logos/fgv.png" width="65" height="52" alt="FGV"></li>
+          <li class="logo logo--tnb"><img src="assets/logos/tnb.png" width="58" height="59" alt="Tenaga Nasional Berhad"></li>
+          <li class="logo logo--air"><img src="assets/logos/air-selangor.png" width="50" height="60" alt="Air Selangor"></li>
+          <li class="logo logo--maybank"><img src="assets/logos/maybank.png" width="119" height="29" alt="Maybank"></li>
+          <li class="logo logo--kpj logo--blend"><img src="assets/logos/kpj-ampang-puteri.png" width="155" height="24" alt="KPJ Ampang Puteri Specialist Hospital"></li>
+          <li class="logo logo--habib logo--blend"><img src="assets/logos/habib.png" width="82" height="41" alt="Habib"></li>
+          <li class="logo logo--bernas"><img src="assets/logos/bernas.png" width="72" height="47" alt="Bernas"></li>
+          <li class="logo logo--genius-aulad"><img src="assets/logos/genius-aulad.png" width="97" height="35" alt="Genius Aulad"></li>
+          <li class="logo logo--petronas"><img src="assets/logos/petronas.png" width="58" height="59" alt="Petronas"></li>
+          <li class="logo logo--roc"><img src="assets/logos/roc.png" width="71" height="48" alt="ROC Oil Company"></li>
+          <!-- Duplicate set for a seamless loop -->
+          <li class="logo logo--tm" aria-hidden="true"><img src="assets/logos/tm.png" width="86" height="40" alt=""></li>
+          <li class="logo logo--fgv" aria-hidden="true"><img src="assets/logos/fgv.png" width="65" height="52" alt=""></li>
+          <li class="logo logo--tnb" aria-hidden="true"><img src="assets/logos/tnb.png" width="58" height="59" alt=""></li>
+          <li class="logo logo--air" aria-hidden="true"><img src="assets/logos/air-selangor.png" width="50" height="60" alt=""></li>
+          <li class="logo logo--maybank" aria-hidden="true"><img src="assets/logos/maybank.png" width="119" height="29" alt=""></li>
+          <li class="logo logo--kpj logo--blend" aria-hidden="true"><img src="assets/logos/kpj-ampang-puteri.png" width="155" height="24" alt=""></li>
+          <li class="logo logo--habib logo--blend" aria-hidden="true"><img src="assets/logos/habib.png" width="82" height="41" alt=""></li>
+          <li class="logo logo--bernas" aria-hidden="true"><img src="assets/logos/bernas.png" width="72" height="47" alt=""></li>
+          <li class="logo logo--genius-aulad" aria-hidden="true"><img src="assets/logos/genius-aulad.png" width="97" height="35" alt=""></li>
+          <li class="logo logo--petronas" aria-hidden="true"><img src="assets/logos/petronas.png" width="58" height="59" alt=""></li>
+          <li class="logo logo--roc" aria-hidden="true"><img src="assets/logos/roc.png" width="71" height="48" alt=""></li>
+        </ul>
         </div>
       </section>
     </main>
@@ -63,9 +75,9 @@
       <img src="assets/close.svg" width="32" height="32" alt="">
     </button>
     <ul class="site-nav__list">
-      <li><a class="site-nav__link type-body" href="tentang.html">Tentang Kami</a></li>
-      <li><a class="site-nav__link type-body" href="#tempah">Tempah</a></li>
-      <li><a class="site-nav__link type-body" href="#produk">Produk D&amp;K</a></li>
+      <li><a class="site-nav__link type-body" href="tentang.html"><span>Tentang Kami</span><img class="site-nav__arrow" src="assets/chevron-down.svg" width="24" height="24" alt=""></a></li>
+      <li><a class="site-nav__link type-body" href="#tempah"><span>Tempah</span><img class="site-nav__arrow" src="assets/chevron-down.svg" width="24" height="24" alt=""></a></li>
+      <li><a class="site-nav__link type-body" href="#produk"><span>Produk D&amp;K</span><img class="site-nav__arrow" src="assets/chevron-down.svg" width="24" height="24" alt=""></a></li>
       <li><a class="site-nav__link type-body" href="#pelanggan">Pelanggan Kami</a></li>
       <li><a class="site-nav__link type-body" href="#hubungi">Hubungi Kami</a></li>
     </ul>

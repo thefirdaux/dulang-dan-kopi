@@ -3,6 +3,7 @@
   --color-hero-band: #f9efe0;
   --color-clients: #fcf5e7;
   --color-text: #000;
+  --color-paper: #faf2e2;   /* paper colour of the storefront illustration */
 
   --drawer-width: 209px;
 
@@ -25,7 +26,8 @@ html {
 
 body {
   margin: 0;
-  background: #fff;
+  /* Matches the last section, so tall windows don't show white below the page */
+  background: var(--color-clients);
   color: var(--color-text);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
@@ -148,8 +150,7 @@ html.nav-open {
   transition: opacity 0.25s ease;
 }
 
-/* Bottom padding is 141px as in the design (854px-tall screen), shrinking on
-   shorter screens so "Bahasa" moves up rather than off the bottom */
+/* Full screen height; "Bahasa" is pinned 51px from the bottom as in the design */
 .site-nav {
   position: fixed;
   top: 0;
@@ -159,7 +160,7 @@ html.nav-open {
   display: flex;
   flex-direction: column;
   width: var(--drawer-width);
-  padding: 15px 16px clamp(24px, calc(100dvh - 713px), 141px);
+  padding: 11px 16px 51px;
   overflow-y: auto;
   background: var(--color-hero-band);
   transform: translateX(100%);
@@ -196,16 +197,16 @@ html.nav-open {
 }
 
 .site-nav__list {
-  margin: 15px 0 0;
+  margin: 19px 0 0;
   padding: 0;
   list-style: none;
 }
 
-/* Rows are 56px with a 0.5px black rule; text sits on the right */
+/* Rows are 56px with a 0.5px black rule; text on the left, arrow (if any) on the right */
 .site-nav__link {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
   width: 100%;
   height: 56px;
   padding: 12px 10px;
@@ -214,13 +215,18 @@ html.nav-open {
   background: none;
   color: inherit;
   font-family: inherit;
-  text-align: right;
+  text-align: left;
   text-decoration: none;
 }
 
 .site-nav__link:hover,
 .site-nav__link:focus-visible {
   background: var(--color-clients);
+}
+
+/* Arrows are shown as designed; the sub-menus they point to aren't built yet */
+.site-nav__arrow {
+  flex: none;
 }
 
 /* "Bahasa" sits at the bottom of the drawer, icon on the left */
@@ -237,6 +243,8 @@ html.nav-open {
 .hero {
   position: relative;
   display: grid;
+  /* On screens wider than the illustration, the sides match its paper */
+  background: var(--color-paper);
 }
 
 .hero > .hero__content,
@@ -310,12 +318,49 @@ html.nav-open {
   margin: 70px auto 0;
   aspect-ratio: 402 / 530;
   overflow: hidden;
-  background: #fff;
+  background: var(--color-paper);
+}
+
+/* Once the illustration stops filling the width, soften its left and right
+   edges into the paper background so there's no visible seam */
+@media (min-width: 561px) {
+  /* The mobile band behind the title is slightly darker than the paper;
+     on wide screens the whole hero is one paper colour instead */
+  .hero__band {
+    display: none;
+  }
+
+  .hero__media {
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 48px, #000 calc(100% - 48px), transparent);
+    mask-image: linear-gradient(to right, transparent, #000 48px, #000 calc(100% - 48px), transparent);
+  }
+}
+
+.hero__media picture {
+  display: block;
 }
 
 .hero__media img {
   width: 100%;
   height: auto;
+}
+
+/* Tablet and desktop: the landscape illustration sits below the titles (its
+   top edge is foliage, so it isn't overlapped). Capped at 1120px wide, and
+   narrower on short screens so the whole storefront fits in view. */
+@media (min-width: 768px) {
+  .hero > .hero__media {
+    grid-area: 2 / 1;
+  }
+
+  .hero__media {
+    width: min(100%, 1120px, max(600px, calc((100svh - 212px) * 1487 / 1058)));
+    max-width: none;
+    margin: 8px auto 0;
+    aspect-ratio: 1487 / 1058;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
 }
 
 /* Clients */
@@ -343,7 +388,7 @@ html.nav-open {
   list-style: none;
   /* Same colour as the section, so white-background logos can blend into it */
   background: var(--color-clients);
-  animation: marquee 36.5s linear infinite;
+  animation: marquee 52.5s linear infinite;
 }
 
 .clients__marquee:hover .clients__track {
@@ -361,33 +406,26 @@ html.nav-open {
   }
 }
 
-/* Each logo sits in a 100×80 slot, sized and offset as in the design */
+/* Each logo is centred in an 80px-tall slot with 16px either side. Sizes are set
+   in the HTML so every logo covers about the same area (~3,400px²): wide logos
+   come out shorter and square ones taller, so they look equally weighted. */
 .logo {
-  position: relative;
+  display: flex;
   flex: none;
-  width: 100px;
+  align-items: center;
+  justify-content: center;
   height: 80px;
-  margin-right: 10px;
+  padding: 0 16px;
 }
 
 .logo img {
-  position: absolute;
-  height: auto;
+  max-width: none;
 }
 
-.logo--tm img  { left: 10px; width: 80px; top: 21px; }
-.logo--fgv img { left: 12px; width: 76px; top: 10px; }
-.logo--tnb img { left: 21px; width: 60px; top: 11px; }
-.logo--air img { left: 25px; width: 50px; top: 10px; }
-
-/* Maybank is a wide solid banner, so it gets a wider slot and is centred vertically */
-.logo--maybank { width: 130px; }
-.logo--maybank img { left: 10px; width: 110px; top: 27px; }
-
-/* KPJ's and Habib's files have white backgrounds; multiply blends the white into the cream */
-.logo--kpj { width: 180px; }
-.logo--kpj img { left: 10px; width: 160px; top: 28px; mix-blend-mode: multiply; }
-.logo--habib img { left: 10px; width: 80px; top: 20px; mix-blend-mode: multiply; }
+/* These logos have white backgrounds; multiply blends the white into the cream */
+.logo--blend img {
+  mix-blend-mode: multiply;
+}
 
 .visually-hidden {
   position: absolute;
