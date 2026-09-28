@@ -95,6 +95,19 @@ img {
   letter-spacing: -0.08px;
 }
 
+.type-title2-emphasized { /* Title2/Emphasized */
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 28px;
+  letter-spacing: -0.26px;
+}
+
+.type-caption1 {          /* Caption1/Regular */
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+}
+
 .type-caption2 {          /* Caption2/Regular */
   font-size: 11px;
   font-weight: 400;
@@ -1138,4 +1151,121 @@ html.sheet-open {
   color: inherit;
   font-family: inherit;
   cursor: pointer;
+}
+
+/* ---------- Your Chart page (Figma 129:3200) ---------- */
+
+.chart {
+  /* Room at the bottom so the list clears the pinned order panel */
+  padding: 0 16px 210px;
+}
+
+.chart__back {
+  display: inline-flex;
+}
+
+.chart__title {
+  margin: 16px 0 24px;
+}
+
+.chart__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* One line per item: picture, details, line total */
+.chart-line {
+  display: flex;
+  gap: 13px;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--color-placeholder);
+}
+
+.chart-line__image {
+  flex: none;
+  width: 81px;
+  height: 81px;
+  background: var(--color-placeholder) center / cover no-repeat;
+}
+
+.chart-line__details {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.chart-line__details p {
+  margin: 0;
+}
+
+/* The quantity sits a little below the note, as in the design */
+.chart-line__details p:last-child {
+  margin-top: 4px;
+}
+
+.chart-line__price {
+  flex: none;
+  padding: 10px 6px;
+  white-space: nowrap;
+}
+
+.chart__empty {
+  margin: 24px 0;
+  color: var(--color-muted);
+}
+
+/* Order summary pinned to the bottom of the screen */
+.order-panel {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 402px;
+  margin: 0 auto;
+  padding: 24px 16px calc(32px + env(safe-area-inset-bottom));
+  border-radius: 16px 16px 0 0;
+  background: var(--color-header);
+}
+
+.order-panel__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+.order-panel__row p {
+  margin: 0;
+}
+
+.order-panel__total {
+  text-align: right;
+}
+
+.order-panel__button {
+  height: 56px;
+  border: 0;
+  border-radius: 99px;
+  background: #25d366;      /* WhatsApp green */
+  color: inherit;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.order-panel__button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* The chart page has no floating cart bar, so no extra bottom room needed */
+.page-chart .menu__list {
+  padding-bottom: 0;
 }

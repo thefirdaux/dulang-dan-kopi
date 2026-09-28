@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Perniagaan Syarikat — Dulang&amp;Kopi</title>
-  <meta name="description" content="Perniagaan syarikat Dulang&Kopi.">
+  <title>Your Chart — Dulang&amp;Kopi</title>
+  <meta name="description" content="Senarai tempahan anda di Dulang&Kopi.">
   <link rel="stylesheet" href="styles.css?v=34c3da2">
 </head>
-<body class="page-about">
+<body class="page-menu page-chart">
   <div class="page">
     <header class="site-header">
       <a class="brand type-title3-emphasized" href="index.html">Dulang&amp;Kopi</a>
@@ -16,21 +16,31 @@
       </button>
     </header>
 
-    <main class="about">
-      <div class="about__section">
-        <h1 class="about__title type-title3-emphasized">Perniagaan Syarikat</h1>
-        <h2 class="about__subheading type-body-emphasized">Perniagaan Syarikat</h2>
-        <div class="about__body type-subheadline">
-          <p>Bermula dengan langkah yang sederhana, kami membuktikan bahawa dedikasi dan ketekunan mampu melahirkan kejayaan bermakna dalam pasaran kompetitif dan dinamik. Kami berbangga kerana berjaya menarik pelanggan setia yang menghargai keaslian serta keenakan masakan kampung yang kami sajikan.</p>
-          <div>
-            <p>Selain daripada menyediakan hidangan tradisional, kami juga memperkenalkan produk yang unik dan inovatif, memenuhi citarasa pelanggan yang pelbagai.</p>
-            <p>Dengan semangat dan kepercayaan yang teguh untuk terus memperbaiki diri, kami berusaha untuk mencapai lebih banyak kejayaan pada masa hadapan.</p>
-          </div>
-          <p>Dalam usaha untuk terus berkembang, kami juga komited untuk memperluaskan rangkaian perkhidmatan kami melalui inovasi dalam menu dan penyediaan makanan. Kami sentiasa mendengar maklum balas pelanggan bagi memastikan setiap pengalaman bersama Dulang dan Kopi adalah luar biasa. Dengan visi yang jelas dan sokongan yang kuat daripada komuniti, kami yakin akan mencapai lebih banyak pencapaian di masa akan datang.</p>
-        </div>
-      </div>
+    <main class="chart">
+      <a class="chart__back" href="tempah.html" aria-label="Kembali ke menu">
+        <img src="assets/back.svg" width="33" height="33" alt="">
+      </a>
 
+      <h1 class="chart__title type-title2-emphasized">Your Chart</h1>
+
+      <ul class="chart__list" id="chart-list"></ul>
+      <p class="chart__empty" id="chart-empty" hidden>Troli anda masih kosong.</p>
     </main>
+  </div>
+
+  <!-- Order summary and the WhatsApp button (Figma 132:3448) -->
+  <div class="order-panel">
+    <div class="order-panel__row">
+      <div>
+        <p class="type-caption2">Order No</p>
+        <p class="type-title3-emphasized" id="order-no">—</p>
+      </div>
+      <div class="order-panel__total">
+        <p class="type-caption2">Total Amount</p>
+        <p class="type-title3-emphasized" id="order-total">MYR00.00</p>
+      </div>
+    </div>
+    <button class="order-panel__button type-callout" type="button" id="order-send">Send order to WhatsApp</button>
   </div>
 
   <div class="nav-backdrop" aria-hidden="true"></div>
@@ -48,7 +58,7 @@
           <ul class="nav-group__items">
             <li><a class="nav-group__link type-footnote" href="tentang.html#latar-belakang">Latar Belakang</a></li>
             <li><a class="nav-group__link type-footnote" href="mesej-pengasas.html">Mesej Pengarah</a></li>
-            <li><a class="nav-group__link type-footnote" href="perniagaan-syarikat.html" aria-current="page">Perniagaan Syarikat</a></li>
+            <li><a class="nav-group__link type-footnote" href="perniagaan-syarikat.html">Perniagaan Syarikat</a></li>
           </ul>
         </div>
       </li>
@@ -86,6 +96,52 @@
     </button>
   </nav>
 
+
+
+  <!-- Add to Cart sheet (Figma 129:3303): slides up when a menu card is tapped -->
+  <div class="sheet-backdrop" id="sheet-backdrop" aria-hidden="true"></div>
+  <div class="sheet" id="item-sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-name">
+    <button class="sheet__close" type="button" id="sheet-close" aria-label="Tutup">
+      <img src="assets/close-32.svg" width="32" height="32" alt="">
+    </button>
+
+    <div class="sheet__item">
+      <div class="sheet__image" id="sheet-image" aria-hidden="true"></div>
+      <div class="sheet__details">
+        <p class="type-caption2" id="sheet-code"></p>
+        <p class="type-callout" id="sheet-name"></p>
+        <p class="sheet__description type-footnote">Food Description</p>
+      </div>
+    </div>
+
+    <label class="sheet__note">
+      <span class="visually-hidden">Additional Note</span>
+      <textarea class="type-footnote" id="sheet-note" rows="2" placeholder="Additional Note"></textarea>
+    </label>
+
+    <div class="sheet__rows">
+      <div class="sheet__row">
+        <span class="type-callout">Amount</span>
+        <div class="sheet__amount">
+          <output class="sheet__quantity type-callout" id="sheet-quantity" for="sheet-minus sheet-plus">1</output>
+          <div class="stepper">
+            <button class="stepper__button" type="button" id="sheet-minus" aria-label="Kurangkan kuantiti">&#8722;</button>
+            <button class="stepper__button" type="button" id="sheet-plus" aria-label="Tambah kuantiti">&#43;</button>
+          </div>
+        </div>
+      </div>
+      <div class="sheet__row">
+        <span class="type-callout">Total Price</span>
+        <span class="type-callout" id="sheet-total">MYR 0.00</span>
+      </div>
+    </div>
+
+    <button class="sheet__cta type-callout" type="button" id="sheet-add">Add to Cart</button>
+  </div>
+
+
+  <script src="cart.js?v=34c3da2"></script>
   <script src="nav.js?v=34c3da2"></script>
+  <script src="chart.js?v=34c3da2"></script>
 </body>
 </html>

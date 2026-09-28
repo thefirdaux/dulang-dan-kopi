@@ -105,10 +105,9 @@
     window.renderCart = (chosen = []) => {
       bar.toggleAttribute('data-empty', chosen.length === 0);
       // Count the food, not the lines: 2 × Nasi Goreng is "2 items"
-      const pieces = chosen.reduce((n, item) => n + (item.quantity || 1), 0);
+      const pieces = Cart.pieces(chosen);
       count.textContent = `${pieces} item${pieces === 1 ? '' : 's'}`;
-      const sum = chosen.reduce((n, item) => n + (item.price || 0) * (item.quantity || 1), 0);
-      total.textContent = chosen.length ? sum.toFixed(2) : '00.00';
+      total.textContent = chosen.length ? Cart.money(Cart.total(chosen)) : '00.00';
     };
     window.renderCart([]);
   }
@@ -130,15 +129,7 @@
       close: document.getElementById('sheet-close'),
     };
 
-    // The cart lasts for this visit only: reloading starts empty. Saving it
-    // can come back with the cart panel, once items can be removed.
-    try {
-      localStorage.removeItem('dnk-cart');   // clear carts saved by earlier versions
-    } catch {
-      /* private browsing — nothing was saved anyway */
-    }
-
-    let cart = [];
+    let cart = Cart.read();
     let chosen = null;        // the item the sheet is showing
     let quantity = 1;
     let opener = null;        // card to return focus to
@@ -204,13 +195,7 @@
     });
 
     els.add.addEventListener('click', () => {
-      const note = els.note.value.trim();
-      const same = cart.find((item) => item.code === chosen.code && item.note === note);
-      if (same) {
-        same.quantity += quantity;
-      } else {
-        cart.push({ ...chosen, quantity, note });
-      }
+      cart = Cart.add(chosen, quantity, els.note.value.trim());
       window.renderCart(cart);
       close();
     });
