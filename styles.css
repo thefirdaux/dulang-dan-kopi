@@ -1080,6 +1080,7 @@ html.sheet-open {
 .sheet__note textarea {
   display: block;
   width: 100%;
+  padding: 0;          /* the browser adds its own padding otherwise */
   border: 0;
   background: none;
   color: inherit;
@@ -1089,6 +1090,15 @@ html.sheet-open {
 
 .sheet__note textarea:focus {
   outline: none;
+}
+
+/* iPhone and iPad zoom the page in when a focused field is under 16px,
+   so use 16px on touch devices and keep the design's 13px elsewhere */
+@media (pointer: coarse) {
+  .sheet__note textarea {
+    font-size: 16px;
+    line-height: 18px;   /* keeps the field the design's 48px tall */
+  }
 }
 
 .sheet__note:focus-within {
