@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tentang D&amp;K — Dulang&amp;Kopi</title>
-  <meta name="description" content="Latar belakang Dulang&Kopi.">
+  <title>Desserts — Pickup — Dulang&amp;Kopi</title>
+  <meta name="description" content="Menu pickup Dulang&Kopi: Desserts.">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body class="page-about">
+<body class="page-menu">
   <div class="page">
     <header class="site-header">
       <a class="brand type-title3-emphasized" href="index.html">Dulang&amp;Kopi</a>
@@ -16,29 +16,36 @@
       </button>
     </header>
 
-    <main class="about">
-      <div class="about__watermark" aria-hidden="true">
-        <img src="assets/hero.png" width="1086" height="1448" alt="">
+    <main class="menu">
+      <div class="menu__bar">
+        <form class="menu-search" role="search">
+          <label class="menu-search__icon" for="menu-search">
+            <img src="assets/search.svg" width="24" height="24" alt="">
+          </label>
+          <input class="menu-search__input type-subheadline" id="menu-search" type="search"
+                 placeholder="Search" aria-label="Cari menu" autocomplete="off" autocorrect="off"
+                 autocapitalize="off" spellcheck="false" inputmode="search" enterkeyhint="search">
+        </form>
+        <nav class="menu-chips" aria-label="Kategori menu">
+          <a class="menu-chip" href="pickup.html">All Day</a>
+          <a class="menu-chip" href="pickup-lunch.html">Lunch (Ala Carte)</a>
+          <a class="menu-chip" href="pickup-desserts.html" aria-current="page">Desserts</a>
+          <a class="menu-chip" href="pickup-coffee-drinks.html">Coffee &amp; Drinks</a>
+          <a class="menu-chip" href="pickup-meal-set.html">Meal Set</a>
+        </nav>
       </div>
 
-      <h1 class="visually-hidden">Tentang Dulang&amp;Kopi</h1>
-
-      <section class="about__section" aria-labelledby="latar-belakang">
-        <hgroup class="about__heading type-title3-emphasized">
-          <h2 id="latar-belakang">Latar Belakang</h2>
-          <p lang="ms-Arab" dir="rtl">لاتر بلاکڠ</p>
-        </hgroup>
-        <div class="about__body type-subheadline">
-          <p>Dulang dan Kopi bermula ditubuhkan pada Februari 2024 sebagai sebuah restoran masakan autentik melayu yang berlokasi di Ampang, Selangor. Dulang dan Kopi merupakan anak syarikat Continuo Ventures.</p>
-          <p>Kami mula mengembangkan perniagaan dengan menawarkan perkhidmatan katering dan mengeluarkan produk-produk makanan tersendiri.<br>Pada masa kini, kami beroperasi dalam 5 cabang F&amp;B iaitu restoran, katering, kantin, pengeluar produk makanan dan perkhidmatan lain seperti hamper, hadiah dan kuih raya.</p>
+      <div class="menu__list">
+        <h2 class="menu-heading type-title2" id="menu-heading">Desserts (0)</h2>
+        <div class="menu-notice">
+          <img src="assets/clock-check.svg" width="32" height="32" alt="">
           <div>
-            <p>Dulang dan Kopi juga memberi tumpuan kepada pengalaman pelanggan dengan menawarkan suasana restoran yang selesa dan mesra keluarga.</p>
-            <p>Dengan konsep yang menggabungkan elemen tradisi dan moden, kami menyediakan pelbagai hidangan melayu klasik yang menggunakan resipi turun-temurun, mengekalkan rasa asli dalam setiap sajian kami.</p>
+            <p class="menu-notice__title type-subheadline-emphasized">This menu in available from 12pm-7pm</p>
+            <p class="type-caption2">Based on stock availability</p>
           </div>
-          <p>Selain itu, kami komited untuk memajukan industri makanan tempatan dengan menyokong produk-produk tempatan. Bahan-bahan yang kami gunakan dipilih dengan teliti daripada pembekal tempatan yang berkualiti tinggi, memastikan hidangan kami segar dan berkualiti. Kami juga merancang untuk mengembangkan rangkaian restoran ke lokasi lain dalam masa terdekat.</p>
         </div>
-      </section>
-
+        <p class="menu-empty">Menu akan datang.</p>
+      </div>
     </main>
   </div>
 
@@ -55,7 +62,7 @@
         </button>
         <div class="nav-group__panel" id="nav-group-tentang">
           <ul class="nav-group__items">
-            <li><a class="nav-group__link type-footnote" href="#latar-belakang">Latar Belakang</a></li>
+            <li><a class="nav-group__link type-footnote" href="tentang.html#latar-belakang">Latar Belakang</a></li>
             <li><a class="nav-group__link type-footnote" href="mesej-pengasas.html">Mesej Pengarah</a></li>
             <li><a class="nav-group__link type-footnote" href="perniagaan-syarikat.html">Perniagaan Syarikat</a></li>
           </ul>
@@ -95,6 +102,8 @@
     </button>
   </nav>
 
+
   <script src="nav.js"></script>
+  <script src="menu.js"></script>
 </body>
 </html>

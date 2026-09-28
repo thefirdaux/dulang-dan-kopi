@@ -5,6 +5,9 @@
   --color-text: #000;
   --color-rule: #242424;    /* 0.5px dividers in the menu drawer */
   --color-paper: #faf2e2;   /* paper colour of the storefront illustration */
+  --color-field: #f5f5f5;   /* search field, chips, card borders */
+  --color-placeholder: #d9d9d9;
+  --color-muted: #8d8b8b;
 
   --drawer-width: 209px;
   --nav-overhang: 120px;    /* how far the drawer reaches past the screen edges (see .nav-backdrop) */
@@ -66,6 +69,34 @@ img {
 .type-body {              /* Body/Regular */
   font-size: 17px;
   font-weight: 400;
+  line-height: 22px;
+  letter-spacing: -0.43px;
+}
+
+.type-title2 {            /* Title2/Regular */
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: -0.26px;
+}
+
+.type-subheadline-emphasized { /* Subheadline/Emphasized */
+  font-size: 15px;
+  font-weight: 590;
+  line-height: 20px;
+  letter-spacing: -0.23px;
+}
+
+.type-caption2 {          /* Caption2/Regular */
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 13px;
+  letter-spacing: 0.06px;
+}
+
+.type-body-emphasized {   /* Body/Emphasized */
+  font-size: 17px;
+  font-weight: 590;
   line-height: 22px;
   letter-spacing: -0.43px;
 }
@@ -601,6 +632,15 @@ html.nav-open {
   margin-top: 69px;
 }
 
+/* Perniagaan Syarikat page: title, then a smaller bold sub-heading */
+.about__title {
+  margin: 0;
+}
+
+.about__subheading {
+  margin: 30px 0 10px;
+}
+
 /* Latin title with the Jawi title underneath */
 .about__heading {
   margin: 0 0 25px;
@@ -616,6 +656,11 @@ html.nav-open {
   text-align: left;
 }
 
+/* On the Mesej Pengasas page the Jawi title is Regular, not Semibold */
+.about__heading p.about__heading-jawi {
+  font-weight: 400;
+}
+
 /* Grouped <div>s hold paragraphs that sit flush together */
 .about__body {
   display: flex;
@@ -625,4 +670,187 @@ html.nav-open {
 
 .about__body p {
   margin: 0;
+}
+
+/* ---------- Pickup menu pages ---------- */
+
+.page-menu,
+.page-menu .site-header {
+  background: #fff;
+}
+
+.menu__bar {
+  position: sticky;
+  top: 62px;           /* under the header */
+  z-index: 5;
+  background: #fff;
+}
+
+/* Search field */
+.menu-search {
+  display: flex;
+  cursor: text;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 16px;
+  padding: 10px 16px;
+  border-radius: 99px;
+  background: var(--color-field);
+}
+
+.menu-search__icon {
+  display: flex;
+  flex: none;
+  cursor: text;
+}
+
+/* Fills the rest of the pill so tapping almost anywhere opens the keyboard */
+.menu-search__input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font-family: inherit;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* iPhone and iPad zoom the page in when a focused field is under 16px,
+   so use 16px on touch devices and keep the design's 15px elsewhere */
+@media (pointer: coarse) {
+  .menu-search__input {
+    font-size: 16px;
+  }
+}
+
+.menu-search__input::placeholder {
+  color: var(--color-muted);
+  opacity: 1;
+}
+
+.menu-search__input:focus {
+  outline: none;
+}
+
+.menu-search:focus-within {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}
+
+/* Category chips: scroll sideways when they don't fit */
+.menu-chips {
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.menu-chips::-webkit-scrollbar {
+  display: none;
+}
+
+.menu-chip {
+  flex: none;
+  padding: 10px 16px;
+  border-radius: 99px;
+  background: var(--color-field);
+  color: inherit;
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: -0.23px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.menu-chip[aria-current="page"] {
+  background: var(--color-hero-band);
+  font-weight: 590;
+}
+
+.menu__list {
+  padding: 19px 16px 32px;
+}
+
+.menu-heading {
+  margin: 0;
+  padding: 10px 0;
+}
+
+/* "Available from…" notice */
+.menu-notice {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-top: 8px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: var(--color-field);
+}
+
+.menu-notice img {
+  flex: none;
+}
+
+.menu-notice p {
+  margin: 0;
+}
+
+/* The notice's two lines sit 4px apart */
+.menu-notice > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Two columns of cards, as in the design */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin: 32px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.menu-card {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 8px;
+  border: 1px solid var(--color-field);
+}
+
+.menu-card__image {
+  aspect-ratio: 1;
+  margin-bottom: 12px;
+  background: var(--color-placeholder);
+}
+
+.menu-card__code {
+  margin: 0;
+  padding: 4px 0;
+}
+
+/* Two lines tall so cards line up whatever the name's length */
+.menu-card__name {
+  min-height: 40px;
+  margin: 4px 0 0;
+  padding: 4px 0;
+  font-weight: 400;
+}
+
+.menu-card__price {
+  display: flex;
+  gap: 4px;
+  margin: 12px 0 0;
+}
+
+.menu-card__amount {
+  font-weight: 590;
+}
+
+.menu-empty {
+  margin: 24px 0 0;
+  color: var(--color-muted);
 }
