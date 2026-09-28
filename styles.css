@@ -814,6 +814,12 @@ html.nav-open {
   list-style: none;
 }
 
+/* A hidden card must stay hidden: this class would otherwise override the
+   browser's rule for [hidden] and the search filter would show everything */
+.menu-card[hidden] {
+  display: none;
+}
+
 .menu-card {
   display: flex;
   flex-direction: column;
