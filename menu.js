@@ -130,23 +130,15 @@
       close: document.getElementById('sheet-close'),
     };
 
-    const CART_KEY = 'dnk-cart';
-    const loadCart = () => {
-      try {
-        return JSON.parse(localStorage.getItem(CART_KEY)) || [];
-      } catch {
-        return [];   // private browsing, cleared data, etc.
-      }
-    };
-    const saveCart = (items) => {
-      try {
-        localStorage.setItem(CART_KEY, JSON.stringify(items));
-      } catch {
-        /* nothing to do — the cart just won't survive a reload */
-      }
-    };
+    // The cart lasts for this visit only: reloading starts empty. Saving it
+    // can come back with the cart panel, once items can be removed.
+    try {
+      localStorage.removeItem('dnk-cart');   // clear carts saved by earlier versions
+    } catch {
+      /* private browsing — nothing was saved anyway */
+    }
 
-    let cart = loadCart();
+    let cart = [];
     let chosen = null;        // the item the sheet is showing
     let quantity = 1;
     let opener = null;        // card to return focus to
@@ -219,7 +211,6 @@
       } else {
         cart.push({ ...chosen, quantity, note });
       }
-      saveCart(cart);
       window.renderCart(cart);
       close();
     });
