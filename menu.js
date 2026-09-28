@@ -61,6 +61,15 @@
     }
     const heading = panel.querySelector('.menu-heading');
     heading.textContent = `${heading.dataset.label} (${shown})`;
+
+    // Categories split into groups (e.g. Lunch): count each and hide empty ones
+    for (const group of panel.querySelectorAll('.menu-group')) {
+      const left = [...group.querySelectorAll('.menu-card')].filter((card) => !card.hidden).length;
+      const title = group.querySelector('.menu-subheading');
+      title.textContent = `${title.dataset.label} (${left})`;
+      group.hidden = left === 0;
+    }
+
     const empty = panel.querySelector('.menu-empty');
     if (cards[index].length) empty.hidden = shown > 0;
   };

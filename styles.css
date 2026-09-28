@@ -802,9 +802,23 @@ html.nav-open {
   padding: 19px 16px 32px;
 }
 
-.menu-heading {
+.menu-heading,
+.menu-subheading {
   margin: 0;
   padding: 10px 0;
+}
+
+/* Groups inside a category, e.g. Kampung Series within Lunch */
+.menu-group + .menu-group {
+  margin-top: 16px;
+}
+
+.menu-group[hidden] {
+  display: none;
+}
+
+.menu-group .menu-grid {
+  margin-top: 0;
 }
 
 /* "Available from…" notice */
@@ -937,8 +951,11 @@ html.nav-open {
 }
 
 .cart-bar__button {
+  display: flex;
   flex: none;
+  align-items: center;
   padding: 6px 10px;
+  text-decoration: none;
   border: 0;
   border-radius: 99px;
   background: var(--color-hero-band);
