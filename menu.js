@@ -122,47 +122,46 @@
   }
 
   // ---- Add to Cart sheet ----------------------------------------------
+  // Plain items have one Amount row (Figma 129:3303). Drinks sold hot and cold
+  // have an Amount (Hot) and an Amount (Cold) row, both starting at 0 (137:3464).
   const sheet = document.getElementById('item-sheet');
   if (sheet) {
     const backdrop = document.getElementById('sheet-backdrop');
+    const el = (id) => document.getElementById(id);
     const els = {
-      code: document.getElementById('sheet-code'),
-      name: document.getElementById('sheet-name'),
-      image: document.getElementById('sheet-image'),
-      note: document.getElementById('sheet-note'),
-      quantity: document.getElementById('sheet-quantity'),
-      choice: document.getElementById('sheet-choice'),
-      hot: document.getElementById('choice-hot'),
-      cold: document.getElementById('choice-cold'),
-      total: document.getElementById('sheet-total'),
-      minus: document.getElementById('sheet-minus'),
-      plus: document.getElementById('sheet-plus'),
-      add: document.getElementById('sheet-add'),
-      close: document.getElementById('sheet-close'),
+      code: el('sheet-code'),
+      name: el('sheet-name'),
+      image: el('sheet-image'),
+      note: el('sheet-note'),
+      total: el('sheet-total'),
+      add: el('sheet-add'),
+      close: el('sheet-close'),
+      rows: { single: el('row-single'), hot: el('row-hot'), cold: el('row-cold') },
+      counts: { single: el('sheet-quantity'), hot: el('hot-quantity'), cold: el('cold-quantity') },
+      minus: { single: el('sheet-minus'), hot: el('hot-minus'), cold: el('cold-minus') },
+      plus: { single: el('sheet-plus'), hot: el('hot-plus'), cold: el('cold-plus') },
     };
 
     let cart = Cart.read();
     let chosen = null;        // the item the sheet is showing
-    let quantity = 1;
-    let choice = null;        // 'Panas' or 'Sejuk' for drinks with two prices
     let opener = null;        // card to return focus to
+    let quantities = { single: 1, hot: 0, cold: 0 };
 
     window.renderCart(cart);
 
-    // Drinks priced hot/cold use the chosen one
-    const unitPrice = () => (choice === 'Sejuk' ? chosen.priceCold : chosen.price);
+    const twoPrices = () => Boolean(chosen && chosen.priceCold);
+    const totalPrice = () => (twoPrices()
+      ? quantities.hot * chosen.price + quantities.cold * chosen.priceCold
+      : quantities.single * chosen.price);
 
-    const showTotal = () => {
-      els.quantity.textContent = quantity;
-      els.minus.disabled = quantity <= 1;
-      els.total.textContent = `MYR ${(unitPrice() * quantity).toFixed(2)}`;
-    };
-
-    const setChoice = (value) => {
-      choice = value;
-      els.hot.setAttribute('aria-pressed', String(value === 'Panas'));
-      els.cold.setAttribute('aria-pressed', String(value === 'Sejuk'));
-      showTotal();
+    const show = () => {
+      for (const key of ['single', 'hot', 'cold']) {
+        els.counts[key].textContent = quantities[key];
+        els.minus[key].disabled = quantities[key] <= (key === 'single' ? 1 : 0);
+      }
+      els.total.textContent = `MYR ${totalPrice().toFixed(2)}`;
+      // Nothing to add while every amount is zero
+      els.add.disabled = twoPrices() && quantities.hot + quantities.cold === 0;
     };
 
     const open = (card) => {
@@ -174,15 +173,15 @@
         priceCold: card.dataset.priceCold ? Number(card.dataset.priceCold) : null,
         image: card.querySelector('.menu-card__image').style.backgroundImage || '',
       };
-      els.choice.hidden = !chosen.priceCold;
-      choice = chosen.priceCold ? 'Panas' : null;
-      if (chosen.priceCold) setChoice('Panas');
       els.code.textContent = chosen.code;
       els.name.textContent = chosen.name;
       els.image.style.backgroundImage = chosen.image;
       els.note.value = '';
-      quantity = 1;
-      showTotal();
+      quantities = { single: 1, hot: 0, cold: 0 };
+      els.rows.single.hidden = twoPrices();
+      els.rows.hot.hidden = !twoPrices();
+      els.rows.cold.hidden = !twoPrices();
+      show();
 
       sheet.classList.add('is-open');
       backdrop.classList.add('is-open');
@@ -197,7 +196,7 @@
       if (opener) opener.focus({ preventScroll: true });
     };
 
-    // Cards open the sheet; they're buttons so keyboards can reach them
+    // Cards open the sheet; they're reachable by keyboard too
     for (const panel of panels) {
       panel.addEventListener('click', (e) => {
         const card = e.target.closest('.menu-card');
@@ -212,23 +211,30 @@
       });
     }
 
-    els.minus.addEventListener('click', () => {
-      quantity = Math.max(1, quantity - 1);
-      showTotal();
-    });
-    els.plus.addEventListener('click', () => {
-      quantity += 1;
-      showTotal();
-    });
-
-    els.hot.addEventListener('click', () => setChoice('Panas'));
-    els.cold.addEventListener('click', () => setChoice('Sejuk'));
+    for (const key of ['single', 'hot', 'cold']) {
+      const floor = key === 'single' ? 1 : 0;
+      els.minus[key].addEventListener('click', () => {
+        quantities[key] = Math.max(floor, quantities[key] - 1);
+        show();
+      });
+      els.plus[key].addEventListener('click', () => {
+        quantities[key] += 1;
+        show();
+      });
+    }
 
     els.add.addEventListener('click', () => {
-      const item = choice
-        ? { ...chosen, name: `${chosen.name} (${choice})`, code: `${chosen.code}-${choice[0]}`, price: unitPrice() }
-        : chosen;
-      cart = Cart.add(item, quantity, els.note.value.trim());
+      const note = els.note.value.trim();
+      if (twoPrices()) {
+        if (quantities.hot) {
+          cart = Cart.add({ ...chosen, name: `${chosen.name} (Hot)`, code: `${chosen.code}-H` }, quantities.hot, note);
+        }
+        if (quantities.cold) {
+          cart = Cart.add({ ...chosen, name: `${chosen.name} (Cold)`, code: `${chosen.code}-C`, price: chosen.priceCold }, quantities.cold, note);
+        }
+      } else {
+        cart = Cart.add(chosen, quantities.single, note);
+      }
       window.renderCart(cart);
       close();
     });

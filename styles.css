@@ -1109,6 +1109,12 @@ html.sheet-open {
   gap: 8px;
 }
 
+/* A hidden row must stay hidden: the class below would otherwise override
+   the browser's rule for [hidden] (same trap as .menu-card) */
+.sheet__row[hidden] {
+  display: none;
+}
+
 .sheet__row {
   display: flex;
   height: 32px;
@@ -1130,29 +1136,6 @@ html.sheet-open {
   justify-content: center;
   border-radius: 99px;
   background: #eeeeef;
-}
-
-/* Panas / Sejuk choice for drinks with two prices */
-.choice {
-  display: flex;
-  height: 32px;
-  border-radius: 99px;
-  background: #eeeeef;
-}
-
-.choice__button {
-  padding: 0 14px;
-  border: 0;
-  border-radius: 99px;
-  background: none;
-  color: inherit;
-  font-family: inherit;
-  cursor: pointer;
-}
-
-.choice__button[aria-pressed="true"] {
-  background: var(--color-header);
-  font-weight: 590;
 }
 
 /* − | + control */
@@ -1180,6 +1163,11 @@ html.sheet-open {
 
 .stepper__button:disabled {
   color: var(--color-muted);
+  cursor: default;
+}
+
+.sheet__cta:disabled {
+  opacity: 0.5;
   cursor: default;
 }
 

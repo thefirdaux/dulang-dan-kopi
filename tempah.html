@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Tempah — Dulang&amp;Kopi</title>
   <meta name="description" content="Menu tempahan Dulang&Kopi: All Day, Lunch, Desserts, Coffee & Drinks dan Meal Set.">
-  <link rel="stylesheet" href="styles.css?v=ea28a44">
+  <link rel="stylesheet" href="styles.css?v=0cc928c">
 </head>
 <body class="page-menu">
   <div class="page">
@@ -691,20 +691,34 @@
     </label>
 
     <div class="sheet__rows">
-      <div class="sheet__row" id="sheet-choice" hidden>
-        <span class="type-callout">Pilihan</span>
-        <div class="choice" role="group" aria-label="Pilihan minuman">
-          <button class="choice__button type-callout" type="button" id="choice-hot" aria-pressed="true">Panas</button>
-          <button class="choice__button type-callout" type="button" id="choice-cold" aria-pressed="false">Sejuk</button>
-        </div>
-      </div>
-      <div class="sheet__row">
+      <div class="sheet__row" id="row-single">
         <span class="type-callout">Amount</span>
         <div class="sheet__amount">
           <output class="sheet__quantity type-callout" id="sheet-quantity" for="sheet-minus sheet-plus">1</output>
           <div class="stepper">
             <button class="stepper__button" type="button" id="sheet-minus" aria-label="Kurangkan kuantiti">&#8722;</button>
             <button class="stepper__button" type="button" id="sheet-plus" aria-label="Tambah kuantiti">&#43;</button>
+          </div>
+        </div>
+      </div>
+      <!-- Drinks sold hot and cold get one row each (Figma 137:3464) -->
+      <div class="sheet__row" id="row-hot" hidden>
+        <span class="type-callout">Amount (Hot)</span>
+        <div class="sheet__amount">
+          <output class="sheet__quantity type-callout" id="hot-quantity" for="hot-minus hot-plus">0</output>
+          <div class="stepper">
+            <button class="stepper__button" type="button" id="hot-minus" aria-label="Kurangkan kuantiti panas">&#8722;</button>
+            <button class="stepper__button" type="button" id="hot-plus" aria-label="Tambah kuantiti panas">&#43;</button>
+          </div>
+        </div>
+      </div>
+      <div class="sheet__row" id="row-cold" hidden>
+        <span class="type-callout">Amount (Cold)</span>
+        <div class="sheet__amount">
+          <output class="sheet__quantity type-callout" id="cold-quantity" for="cold-minus cold-plus">0</output>
+          <div class="stepper">
+            <button class="stepper__button" type="button" id="cold-minus" aria-label="Kurangkan kuantiti sejuk">&#8722;</button>
+            <button class="stepper__button" type="button" id="cold-plus" aria-label="Tambah kuantiti sejuk">&#43;</button>
           </div>
         </div>
       </div>
@@ -717,8 +731,8 @@
     <button class="sheet__cta type-callout" type="button" id="sheet-add">Add to Cart</button>
   </div>
 
-  <script src="cart.js?v=ea28a44"></script>
-  <script src="nav.js?v=ea28a44"></script>
-  <script src="menu.js?v=ea28a44"></script>
+  <script src="cart.js?v=0cc928c"></script>
+  <script src="nav.js?v=0cc928c"></script>
+  <script src="menu.js?v=0cc928c"></script>
 </body>
 </html>
