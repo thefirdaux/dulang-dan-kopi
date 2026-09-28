@@ -903,7 +903,20 @@ html.nav-open {
   box-shadow: 0 4px 16px rgb(0 0 0 / 0.12);
 }
 
-/* Three thumbnails fanned out, as in the design */
+/* Empty cart: a dashed outline where the pictures will go */
+.cart-bar__placeholder {
+  flex: none;
+  width: 45px;
+  height: 32px;
+  border: 1px dashed var(--color-placeholder);
+}
+
+.cart-bar[data-empty] .cart-bar__thumbs,
+.cart-bar:not([data-empty]) .cart-bar__placeholder {
+  display: none;
+}
+
+/* Pictures of the chosen items, stacked and fanned out */
 .cart-bar__thumbs {
   position: relative;
   flex: none;
@@ -916,7 +929,7 @@ html.nav-open {
   width: 32px;
   height: 32px;
   border: 0.2px solid var(--color-text);
-  background: var(--color-placeholder);
+  background: var(--color-placeholder) center / cover no-repeat;
 }
 
 .cart-bar__thumb:nth-child(1) { top: 3px; left: 0; }

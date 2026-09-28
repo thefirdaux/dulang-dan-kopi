@@ -94,6 +94,33 @@
   input.addEventListener('input', () => filter(current()));
   input.addEventListener('search', () => filter(current()));   // Safari's clear (✕) button
 
+  // ---- Cart bar -------------------------------------------------------
+  // Empty: dashed box, "0 items", MYR 00.00 (Figma 131:3319).
+  // With items: up to three item pictures stacked, count and total (129:3316).
+  // Wire the real cart by calling renderCart([{ name, price, image }, ...]).
+  const bar = document.getElementById('cart-bar');
+  if (bar) {
+    const thumbs = document.getElementById('cart-thumbs');
+    const count = document.getElementById('cart-count');
+    const total = document.getElementById('cart-total');
+
+    window.renderCart = (chosen = []) => {
+      bar.toggleAttribute('data-empty', chosen.length === 0);
+      count.textContent = `${chosen.length} item${chosen.length === 1 ? '' : 's'}`;
+      const sum = chosen.reduce((n, item) => n + (item.price || 0) * (item.quantity || 1), 0);
+      total.textContent = chosen.length ? sum.toFixed(2) : '00.00';
+
+      thumbs.textContent = '';
+      for (const item of chosen.slice(0, 3)) {
+        const thumb = document.createElement('span');
+        thumb.className = 'cart-bar__thumb';
+        if (item.image) thumb.style.backgroundImage = `url("${item.image}")`;
+        thumbs.append(thumb);
+      }
+    };
+    window.renderCart([]);
+  }
+
   // Open the category named in the address, e.g. .../tempah.html#desserts
   const fromHash = tabs.findIndex((t) => t.id === `tab-${location.hash.slice(1)}`);
   if (fromHash > 0) select(fromHash, { scroll: false });
