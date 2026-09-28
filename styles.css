@@ -754,6 +754,9 @@ html.nav-open {
 
 .menu-chip {
   flex: none;
+  border: 0;
+  font-family: inherit;
+  cursor: pointer;
   padding: 10px 16px;
   border-radius: 99px;
   background: var(--color-field);
@@ -765,9 +768,14 @@ html.nav-open {
   white-space: nowrap;
 }
 
-.menu-chip[aria-current="page"] {
+.menu-chip[aria-current="page"],
+.menu-chip[aria-selected="true"] {
   background: var(--color-hero-band);
   font-weight: 590;
+}
+
+.menu-panel[hidden] {
+  display: none;
 }
 
 .menu__list {
