@@ -895,6 +895,7 @@ html.nav-open {
   gap: 8px;
   align-items: center;
   max-width: 370px;
+  height: 64px;
   margin: 0 auto;
   padding: 8px 10px;
   border-radius: 16px;
