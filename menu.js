@@ -106,7 +106,9 @@
 
     window.renderCart = (chosen = []) => {
       bar.toggleAttribute('data-empty', chosen.length === 0);
-      count.textContent = `${chosen.length} item${chosen.length === 1 ? '' : 's'}`;
+      // Count the food, not the lines: 2 × Nasi Goreng is "2 items"
+      const pieces = chosen.reduce((n, item) => n + (item.quantity || 1), 0);
+      count.textContent = `${pieces} item${pieces === 1 ? '' : 's'}`;
       const sum = chosen.reduce((n, item) => n + (item.price || 0) * (item.quantity || 1), 0);
       total.textContent = chosen.length ? sum.toFixed(2) : '00.00';
 
@@ -119,6 +121,124 @@
       }
     };
     window.renderCart([]);
+  }
+
+  // ---- Add to Cart sheet ----------------------------------------------
+  const sheet = document.getElementById('item-sheet');
+  if (sheet) {
+    const backdrop = document.getElementById('sheet-backdrop');
+    const els = {
+      code: document.getElementById('sheet-code'),
+      name: document.getElementById('sheet-name'),
+      image: document.getElementById('sheet-image'),
+      note: document.getElementById('sheet-note'),
+      quantity: document.getElementById('sheet-quantity'),
+      total: document.getElementById('sheet-total'),
+      minus: document.getElementById('sheet-minus'),
+      plus: document.getElementById('sheet-plus'),
+      add: document.getElementById('sheet-add'),
+      close: document.getElementById('sheet-close'),
+    };
+
+    const CART_KEY = 'dnk-cart';
+    const loadCart = () => {
+      try {
+        return JSON.parse(localStorage.getItem(CART_KEY)) || [];
+      } catch {
+        return [];   // private browsing, cleared data, etc.
+      }
+    };
+    const saveCart = (items) => {
+      try {
+        localStorage.setItem(CART_KEY, JSON.stringify(items));
+      } catch {
+        /* nothing to do — the cart just won't survive a reload */
+      }
+    };
+
+    let cart = loadCart();
+    let chosen = null;        // the item the sheet is showing
+    let quantity = 1;
+    let opener = null;        // card to return focus to
+
+    window.renderCart(cart);
+
+    const showTotal = () => {
+      els.quantity.textContent = quantity;
+      els.minus.disabled = quantity <= 1;
+      els.total.textContent = `MYR ${(chosen.price * quantity).toFixed(2)}`;
+    };
+
+    const open = (card) => {
+      opener = card;
+      chosen = {
+        code: card.querySelector('.menu-card__code').textContent,
+        name: card.querySelector('.menu-card__name').textContent,
+        price: Number(card.querySelector('.menu-card__amount').textContent),
+        image: card.querySelector('.menu-card__image').style.backgroundImage || '',
+      };
+      els.code.textContent = chosen.code;
+      els.name.textContent = chosen.name;
+      els.image.style.backgroundImage = chosen.image;
+      els.note.value = '';
+      quantity = 1;
+      showTotal();
+
+      sheet.classList.add('is-open');
+      backdrop.classList.add('is-open');
+      document.documentElement.classList.add('sheet-open');
+      els.close.focus();
+    };
+
+    const close = () => {
+      sheet.classList.remove('is-open');
+      backdrop.classList.remove('is-open');
+      document.documentElement.classList.remove('sheet-open');
+      if (opener) opener.focus({ preventScroll: true });
+    };
+
+    // Cards open the sheet; they're buttons so keyboards can reach them
+    for (const panel of panels) {
+      panel.addEventListener('click', (e) => {
+        const card = e.target.closest('.menu-card');
+        if (card) open(card);
+      });
+      panel.addEventListener('keydown', (e) => {
+        if (e.key !== 'Enter' && e.key !== ' ') return;
+        const card = e.target.closest('.menu-card');
+        if (!card) return;
+        e.preventDefault();
+        open(card);
+      });
+    }
+
+    els.minus.addEventListener('click', () => {
+      quantity = Math.max(1, quantity - 1);
+      showTotal();
+    });
+    els.plus.addEventListener('click', () => {
+      quantity += 1;
+      showTotal();
+    });
+
+    els.add.addEventListener('click', () => {
+      const note = els.note.value.trim();
+      const same = cart.find((item) => item.code === chosen.code && item.note === note);
+      if (same) {
+        same.quantity += quantity;
+      } else {
+        cart.push({ ...chosen, quantity, note });
+      }
+      saveCart(cart);
+      window.renderCart(cart);
+      close();
+    });
+
+    els.close.addEventListener('click', close);
+    backdrop.addEventListener('click', close);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && sheet.classList.contains('is-open')) close();
+    });
   }
 
   // Open the category named in the address, e.g. .../tempah.html#desserts

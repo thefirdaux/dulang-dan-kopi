@@ -839,6 +839,7 @@ html.nav-open {
 .menu-card {
   display: flex;
   flex-direction: column;
+  cursor: pointer;
   padding: 12px 8px;
   border: 1px solid var(--color-field);
 }
@@ -969,4 +970,195 @@ html.nav-open {
 /* Room so the last row of cards isn't hidden behind the bar */
 .page-menu .menu__list {
   padding-bottom: calc(93px + env(safe-area-inset-bottom));
+}
+
+/* ---------- Add to Cart sheet (Figma 129:3303) ---------- */
+
+.sheet-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  background: rgb(0 0 0 / 0.25);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0s linear 0.25s;
+}
+
+.sheet-backdrop.is-open {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.25s ease;
+}
+
+/* Slides up from the bottom of the screen */
+.sheet {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 25;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 402px;
+  margin: 0 auto;
+  padding: 24px 16px calc(48px + env(safe-area-inset-bottom));
+  border-radius: 16px 16px 0 0;
+  background: #fff;
+  transform: translateY(100%);
+  visibility: hidden;
+  transition: transform 0.25s ease, visibility 0s linear 0.25s;
+}
+
+.sheet.is-open {
+  transform: none;
+  visibility: visible;
+  transition: transform 0.25s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sheet,
+  .sheet.is-open,
+  .sheet-backdrop,
+  .sheet-backdrop.is-open {
+    transition: none;
+  }
+}
+
+html.sheet-open {
+  overflow: hidden;
+}
+
+.sheet__close {
+  align-self: flex-end;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+/* Picture, code, name and description */
+.sheet__item {
+  display: flex;
+  gap: 17px;
+  align-items: flex-start;
+}
+
+.sheet__image {
+  flex: none;
+  width: 100px;
+  height: 100px;
+  background: var(--color-placeholder) center / cover no-repeat;
+}
+
+.sheet__details {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.sheet__details p {
+  margin: 0;
+}
+
+.sheet__description {
+  color: var(--color-muted);
+}
+
+/* Free-text note */
+.sheet__note {
+  display: block;
+  padding: 6px;
+  border-radius: 8px;
+  background: var(--color-field);
+}
+
+.sheet__note textarea {
+  display: block;
+  width: 100%;
+  border: 0;
+  background: none;
+  color: inherit;
+  font-family: inherit;
+  resize: none;
+}
+
+.sheet__note textarea:focus {
+  outline: none;
+}
+
+.sheet__note:focus-within {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}
+
+.sheet__rows {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sheet__row {
+  display: flex;
+  height: 32px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sheet__amount {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.sheet__quantity {
+  display: flex;
+  width: 52px;
+  height: 32px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 99px;
+  background: #eeeeef;
+}
+
+/* − | + control */
+.stepper {
+  display: flex;
+  width: 92px;
+  height: 32px;
+  border-radius: 99px;
+  background: #eeeeef;
+}
+
+.stepper__button {
+  flex: 1;
+  border: 0;
+  background: none;
+  color: inherit;
+  font-family: inherit;
+  font-size: 17px;
+  cursor: pointer;
+}
+
+.stepper__button + .stepper__button {
+  border-left: 1px solid rgb(0 0 0 / 0.15);
+}
+
+.stepper__button:disabled {
+  color: var(--color-muted);
+  cursor: default;
+}
+
+.sheet__cta {
+  height: 56px;
+  border: 0;
+  border-radius: 99px;
+  background: var(--color-header);
+  color: inherit;
+  font-family: inherit;
+  cursor: pointer;
 }
