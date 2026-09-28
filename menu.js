@@ -95,12 +95,10 @@
   input.addEventListener('search', () => filter(current()));   // Safari's clear (✕) button
 
   // ---- Cart bar -------------------------------------------------------
-  // Empty: dashed box, "0 items", MYR 00.00 (Figma 131:3319).
-  // With items: up to three item pictures stacked, count and total (129:3316).
-  // Wire the real cart by calling renderCart([{ name, price, image }, ...]).
+  // Shows how many items are in the cart and what they come to.
+  // Wire the real cart by calling renderCart([{ name, price, quantity }, ...]).
   const bar = document.getElementById('cart-bar');
   if (bar) {
-    const thumbs = document.getElementById('cart-thumbs');
     const count = document.getElementById('cart-count');
     const total = document.getElementById('cart-total');
 
@@ -111,14 +109,6 @@
       count.textContent = `${pieces} item${pieces === 1 ? '' : 's'}`;
       const sum = chosen.reduce((n, item) => n + (item.price || 0) * (item.quantity || 1), 0);
       total.textContent = chosen.length ? sum.toFixed(2) : '00.00';
-
-      thumbs.textContent = '';
-      for (const item of chosen.slice(0, 3)) {
-        const thumb = document.createElement('span');
-        thumb.className = 'cart-bar__thumb';
-        if (item.image) thumb.style.backgroundImage = `url("${item.image}")`;
-        thumbs.append(thumb);
-      }
     };
     window.renderCart([]);
   }
