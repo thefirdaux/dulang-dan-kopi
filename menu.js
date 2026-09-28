@@ -131,6 +131,9 @@
       image: document.getElementById('sheet-image'),
       note: document.getElementById('sheet-note'),
       quantity: document.getElementById('sheet-quantity'),
+      choice: document.getElementById('sheet-choice'),
+      hot: document.getElementById('choice-hot'),
+      cold: document.getElementById('choice-cold'),
       total: document.getElementById('sheet-total'),
       minus: document.getElementById('sheet-minus'),
       plus: document.getElementById('sheet-plus'),
@@ -141,14 +144,25 @@
     let cart = Cart.read();
     let chosen = null;        // the item the sheet is showing
     let quantity = 1;
+    let choice = null;        // 'Panas' or 'Sejuk' for drinks with two prices
     let opener = null;        // card to return focus to
 
     window.renderCart(cart);
 
+    // Drinks priced hot/cold use the chosen one
+    const unitPrice = () => (choice === 'Sejuk' ? chosen.priceCold : chosen.price);
+
     const showTotal = () => {
       els.quantity.textContent = quantity;
       els.minus.disabled = quantity <= 1;
-      els.total.textContent = `MYR ${(chosen.price * quantity).toFixed(2)}`;
+      els.total.textContent = `MYR ${(unitPrice() * quantity).toFixed(2)}`;
+    };
+
+    const setChoice = (value) => {
+      choice = value;
+      els.hot.setAttribute('aria-pressed', String(value === 'Panas'));
+      els.cold.setAttribute('aria-pressed', String(value === 'Sejuk'));
+      showTotal();
     };
 
     const open = (card) => {
@@ -156,9 +170,13 @@
       chosen = {
         code: card.querySelector('.menu-card__code').textContent,
         name: card.querySelector('.menu-card__name').textContent,
-        price: Number(card.querySelector('.menu-card__amount').textContent),
+        price: Number(card.dataset.price ?? card.querySelector('.menu-card__amount').textContent),
+        priceCold: card.dataset.priceCold ? Number(card.dataset.priceCold) : null,
         image: card.querySelector('.menu-card__image').style.backgroundImage || '',
       };
+      els.choice.hidden = !chosen.priceCold;
+      choice = chosen.priceCold ? 'Panas' : null;
+      if (chosen.priceCold) setChoice('Panas');
       els.code.textContent = chosen.code;
       els.name.textContent = chosen.name;
       els.image.style.backgroundImage = chosen.image;
@@ -203,8 +221,14 @@
       showTotal();
     });
 
+    els.hot.addEventListener('click', () => setChoice('Panas'));
+    els.cold.addEventListener('click', () => setChoice('Sejuk'));
+
     els.add.addEventListener('click', () => {
-      cart = Cart.add(chosen, quantity, els.note.value.trim());
+      const item = choice
+        ? { ...chosen, name: `${chosen.name} (${choice})`, code: `${chosen.code}-${choice[0]}`, price: unitPrice() }
+        : chosen;
+      cart = Cart.add(item, quantity, els.note.value.trim());
       window.renderCart(cart);
       close();
     });

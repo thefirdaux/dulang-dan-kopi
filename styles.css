@@ -1132,6 +1132,29 @@ html.sheet-open {
   background: #eeeeef;
 }
 
+/* Panas / Sejuk choice for drinks with two prices */
+.choice {
+  display: flex;
+  height: 32px;
+  border-radius: 99px;
+  background: #eeeeef;
+}
+
+.choice__button {
+  padding: 0 14px;
+  border: 0;
+  border-radius: 99px;
+  background: none;
+  color: inherit;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.choice__button[aria-pressed="true"] {
+  background: var(--color-header);
+  font-weight: 590;
+}
+
 /* − | + control */
 .stepper {
   display: flex;
