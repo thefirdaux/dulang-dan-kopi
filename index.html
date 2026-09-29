@@ -71,9 +71,14 @@
 
   <div class="nav-backdrop" aria-hidden="true"></div>
   <nav id="site-nav" class="site-nav" aria-label="Navigasi utama">
-    <button class="site-nav__close" type="button" aria-label="Tutup menu">
-      <img src="assets/close.svg" width="24" height="24" alt="">
-    </button>
+    <div class="site-nav__top">
+      <a class="site-nav__home" href="index.html" aria-label="Ke laman utama">
+        <img src="assets/home.svg" width="24" height="24" alt="">
+      </a>
+      <button class="site-nav__close" type="button" aria-label="Tutup menu">
+        <img src="assets/close.svg" width="24" height="24" alt="">
+      </button>
+    </div>
     <ul class="site-nav__list">
       <li class="nav-group">
         <button class="nav-group__header type-subheadline" type="button" aria-expanded="false" aria-controls="nav-group-tentang">
@@ -115,11 +120,22 @@
       <li><a class="site-nav__link type-subheadline" href="#pelanggan">Pelanggan Kami</a></li>
       <li><a class="site-nav__link type-subheadline" href="#hubungi">Hubungi Kami</a></li>
     </ul>
-    <!-- Placeholder: language options not designed yet -->
-    <button class="site-nav__link site-nav__language type-subheadline" type="button">
-      <img src="assets/translate.svg" width="32" height="32" alt="">
-      <span>Bahasa</span>
-    </button>
+    <!-- Placeholder: choosing a language does nothing yet -->
+    <div class="nav-group site-nav__language">
+      <button class="nav-group__header type-subheadline" type="button" aria-expanded="false" aria-controls="nav-group-bahasa">
+        <span class="nav-group__label">
+          <img src="assets/language.svg" width="24" height="24" alt="">
+          Bahasa
+        </span>
+        <img class="nav-group__arrow" src="assets/chevron-down.svg" width="24" height="24" alt="">
+      </button>
+      <div class="nav-group__panel" id="nav-group-bahasa">
+        <ul class="nav-group__items">
+          <li><button class="nav-group__link type-subheadline" type="button">Bahasa Malaysia</button></li>
+          <li><button class="nav-group__link type-subheadline" type="button">English Language</button></li>
+        </ul>
+      </div>
+    </div>
   </nav>
 
   <script src="nav.js?v=a2213d3"></script>

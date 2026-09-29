@@ -261,19 +261,34 @@ html.nav-open {
   }
 }
 
-/* 24px icon with a 44px tap area around it. It sits 18px from the top and 16px
-   from the right, the same spot as the menu (hamburger) button in the header,
-   so opening and closing the menu happens in one place. */
+/* Home on the left, close on the right (Figma 143:1540) */
+.site-nav__top {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* 24px icons with a 44px tap area around them. Close sits 18px from the top and
+   16px from the right, the same spot as the menu (hamburger) button in the
+   header, so opening and closing the menu happens in one place. */
+.site-nav__home,
 .site-nav__close {
   flex: none;
-  align-self: flex-end;
   width: 44px;
   height: 44px;
-  margin: -10px -10px 0 0;
   padding: 10px;
   border: 0;
   background: none;
   cursor: pointer;
+}
+
+.site-nav__home {
+  margin: -10px 0 0 -10px;
+}
+
+.site-nav__close {
+  margin: -10px -10px 0 0;
 }
 
 .site-nav__list {
@@ -384,10 +399,26 @@ html.nav-open {
   background: var(--color-clients);
 }
 
-/* "Bahasa" sits at the bottom of the drawer, icon on the left */
+/* "Bahasa" sits at the bottom of the drawer and opens like the other groups,
+   with its icon to the left of the label */
 .site-nav__language {
   flex: none;
   margin-top: auto;
+}
+
+.nav-group__label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* The language rows are plain buttons: nothing is wired up behind them yet */
+.site-nav__language .nav-group__link {
+  width: 100%;
+  border: 0;
+  background: none;
+  font-family: inherit;
+  text-align: left;
   cursor: pointer;
 }
 
