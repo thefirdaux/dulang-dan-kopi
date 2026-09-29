@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Tempah — Dulang&amp;Kopi</title>
   <meta name="description" content="Menu tempahan Dulang&Kopi: All Day, Lunch, Desserts, Coffee & Drinks dan Meal Set.">
-  <link rel="stylesheet" href="styles.css?v=df06995">
+  <link rel="stylesheet" href="styles.css?v=21ca23c">
 </head>
 <body class="page-menu">
   <div class="page">
@@ -28,15 +28,15 @@
         </form>
         <div class="menu-chips" role="tablist" aria-label="Kategori menu">
           <button class="menu-chip" type="button" role="tab" id="tab-all-day"
-                  aria-controls="panel-all-day" aria-selected="true">All Day</button>
+                  aria-controls="panel-all-day" aria-selected="true" data-label="All Day">All Day</button>
           <button class="menu-chip" type="button" role="tab" id="tab-lunch"
-                  aria-controls="panel-lunch" aria-selected="false" tabindex="-1">Lunch (Ala Carte)</button>
+                  aria-controls="panel-lunch" aria-selected="false" tabindex="-1" data-label="Lunch (Ala Carte)">Lunch (Ala Carte)</button>
           <button class="menu-chip" type="button" role="tab" id="tab-desserts"
-                  aria-controls="panel-desserts" aria-selected="false" tabindex="-1">Desserts</button>
+                  aria-controls="panel-desserts" aria-selected="false" tabindex="-1" data-label="Desserts">Desserts</button>
           <button class="menu-chip" type="button" role="tab" id="tab-coffee-drinks"
-                  aria-controls="panel-coffee-drinks" aria-selected="false" tabindex="-1">Coffee &amp; Drinks</button>
+                  aria-controls="panel-coffee-drinks" aria-selected="false" tabindex="-1" data-label="Coffee &amp; Drinks">Coffee &amp; Drinks</button>
           <button class="menu-chip" type="button" role="tab" id="tab-meal-set"
-                  aria-controls="panel-meal-set" aria-selected="false" tabindex="-1">Meal Set</button>
+                  aria-controls="panel-meal-set" aria-selected="false" tabindex="-1" data-label="Meal Set">Meal Set</button>
         </div>
       </div>
 
@@ -601,6 +601,8 @@
           </div>
           <p class="menu-empty">Menu akan datang.</p>
         </section>
+
+        <p class="menu-empty" id="search-empty" hidden>Tiada menu yang sepadan.</p>
       </div>
 
       <!-- Cart bar: item count, total and the View Chart button -->
@@ -731,8 +733,8 @@
     <button class="sheet__cta type-callout" type="button" id="sheet-add">Add to Cart</button>
   </div>
 
-  <script src="cart.js?v=df06995"></script>
-  <script src="nav.js?v=df06995"></script>
-  <script src="menu.js?v=df06995"></script>
+  <script src="cart.js?v=21ca23c"></script>
+  <script src="nav.js?v=21ca23c"></script>
+  <script src="menu.js?v=21ca23c"></script>
 </body>
 </html>

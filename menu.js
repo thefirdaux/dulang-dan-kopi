@@ -1,4 +1,4 @@
-// Tempah page: category tabs plus a search that filters the open category
+// Tempah page: category tabs plus a search that runs across every category
 // and highlights the matching letters.
 (() => {
   const input = document.getElementById('menu-search');
@@ -47,9 +47,12 @@
     el.append(text.slice(from));
   };
 
-  const filter = (index) => {
+  const current = () => tabs.findIndex((t) => t.getAttribute('aria-selected') === 'true');
+  const searchEmpty = document.getElementById('search-empty');
+
+  // Filters one category, marking matches; returns how many are left
+  const filterPanel = (index, query) => {
     const panel = panels[index];
-    const query = input.value.trim().toLowerCase();
     let shown = 0;
     for (const card of cards[index]) {
       const match = !query || card.haystack.includes(query);
@@ -69,19 +72,48 @@
       title.textContent = `${title.dataset.label} (${left})`;
       group.hidden = left === 0;
     }
+    return shown;
+  };
 
-    const empty = panel.querySelector('.menu-empty');
-    if (cards[index].length) empty.hidden = shown > 0;
+  // An empty box shows the open category; a search shows every category that matches,
+  // one after another, with the count of each on its chip.
+  const filter = () => {
+    const query = input.value.trim().toLowerCase();
+    const open = current();
+    let found = 0;
+
+    panels.forEach((panel, index) => {
+      const shown = filterPanel(index, query);
+      found += shown;
+      panel.hidden = query ? shown === 0 : index !== open;
+
+      const chip = tabs[index];
+      chip.textContent = query ? `${chip.dataset.label} (${shown})` : chip.dataset.label;
+      chip.classList.toggle('menu-chip--quiet', Boolean(query) && shown === 0);
+
+      const empty = panel.querySelector(':scope > .menu-empty');
+      if (empty) empty.hidden = cards[index].length ? true : Boolean(query);   // "Menu akan datang"
+    });
+
+    searchEmpty.hidden = !query || found > 0;
+  };
+
+  // While searching, a chip jumps to its category instead of changing tab
+  const goTo = (index) => {
+    if (panels[index].hidden) return;
+    const bar = document.querySelector('.menu__bar');
+    const top = panels[index].getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({ top: Math.max(0, top - (bar ? bar.offsetHeight : 0) - 8) });
   };
 
   const select = (index, { focus = false, scroll = true } = {}) => {
     tabs.forEach((tab, i) => {
-      const current = i === index;
-      tab.setAttribute('aria-selected', String(current));
-      tab.tabIndex = current ? 0 : -1;
-      panels[i].hidden = !current;
+      const chosen = i === index;
+      tab.setAttribute('aria-selected', String(chosen));
+      tab.tabIndex = chosen ? 0 : -1;
     });
-    filter(index);
+    input.value = '';        // a tab shows its whole category
+    filter();
     if (focus) tabs[index].focus();
     tabs[index].scrollIntoView({ inline: 'nearest', block: 'nearest' });
     if (scroll) window.scrollTo({ top: 0 });
@@ -89,7 +121,10 @@
   };
 
   tabs.forEach((tab, index) => {
-    tab.addEventListener('click', () => select(index));
+    tab.addEventListener('click', () => {
+      if (input.value.trim()) goTo(index);
+      else select(index);
+    });
     // Left/right arrows move between tabs, as expected of a tab bar
     tab.addEventListener('keydown', (e) => {
       const step = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
@@ -99,9 +134,8 @@
     });
   });
 
-  const current = () => tabs.findIndex((t) => t.getAttribute('aria-selected') === 'true');
-  input.addEventListener('input', () => filter(current()));
-  input.addEventListener('search', () => filter(current()));   // Safari's clear (✕) button
+  input.addEventListener('input', filter);
+  input.addEventListener('search', filter);   // Safari's clear (✕) button
 
   // ---- Cart bar -------------------------------------------------------
   // Shows how many items are in the cart and what they come to.

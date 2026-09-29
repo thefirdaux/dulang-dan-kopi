@@ -794,6 +794,16 @@ html.nav-open {
   font-weight: 590;
 }
 
+/* A search puts a count on every chip; the ones with nothing to show step back */
+.menu-chip--quiet {
+  opacity: 0.4;
+}
+
+/* A search stacks the matching categories, so they need space between them */
+.menu-panel + .menu-panel {
+  margin-top: 16px;
+}
+
 .menu-panel[hidden] {
   display: none;
 }
