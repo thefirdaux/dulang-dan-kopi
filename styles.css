@@ -34,6 +34,7 @@ body {
   margin: 0;
   /* Matches the last section, so tall windows don't show white below the page */
   background: var(--color-clients);
+  --color-drawer: var(--color-clients);   /* the drawer follows the page (see .site-nav) */
   color: var(--color-text);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
@@ -237,7 +238,7 @@ html.nav-open {
   padding: calc(18px + var(--nav-overhang)) 16px calc(51px + 100lvh - 100dvh + var(--nav-overhang));
   overflow-y: auto;
   overscroll-behavior: contain;
-  background: var(--color-hero-band);
+  background: var(--color-drawer, var(--color-hero-band));
   transform: translateX(100%);
   visibility: hidden;
   transition: transform 0.25s ease, visibility 0s linear 0.25s;
@@ -646,6 +647,7 @@ html.nav-open {
 
 .page-about {
   background: var(--color-header);
+  --color-drawer: var(--color-header);
 }
 
 .about {
@@ -729,6 +731,10 @@ html.nav-open {
 .page-menu,
 .page-menu .site-header {
   background: #fff;
+}
+
+.page-menu {
+  --color-drawer: #fff;
 }
 
 .menu__bar {
