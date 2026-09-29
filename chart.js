@@ -53,6 +53,7 @@
     const category = item.code.startsWith('DNKR-KS') ? 'lunch'
       : item.code.startsWith('DNKR-DS') ? 'desserts'
       : item.code.startsWith('DNKR-BV') ? 'coffee-drinks'
+      : item.code.startsWith('DNKR-MS') ? 'meal-set'
       : 'all-day';
     li.querySelector('.icon-button[href]').href = `tempah.html#${category}`;
 
