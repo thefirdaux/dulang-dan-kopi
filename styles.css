@@ -292,7 +292,7 @@ html.nav-open {
 }
 
 .site-nav__list {
-  margin: 20px 0 0;   /* first row starts 72px from the top, as in the design */
+  margin: 12px 0 0;   /* first row sits 8px higher than the design's 72px */
   padding: 0;
   list-style: none;
 }
