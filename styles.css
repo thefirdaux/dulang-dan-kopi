@@ -1181,64 +1181,131 @@ html.sheet-open {
   cursor: pointer;
 }
 
-/* ---------- Your Chart page (Figma 129:3200) ---------- */
+/* ---------- Your Order page (Figma 129:3200) ---------- */
 
 .chart {
   /* Room at the bottom so the list clears the pinned order panel */
-  padding: 0 16px 210px;
+  padding: 10px 16px 210px;
 }
 
-.chart__back {
-  display: inline-flex;
+.chart__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
 }
 
 .chart__title {
-  margin: 16px 0 24px;
+  margin: 0;
+}
+
+.chart__clear {
+  padding: 10px;
+  border: 0;
+  border-radius: 99px;
+  background: var(--color-field);
+  color: inherit;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.chart__clear:disabled {
+  opacity: 0.5;
+  cursor: default;
 }
 
 .chart__list {
-  margin: 0;
+  margin: 29px 0 0;
   padding: 0;
   list-style: none;
 }
 
-/* One line per item: picture, details, line total */
+/* One line per item */
 .chart-line {
   display: flex;
-  gap: 13px;
-  align-items: center;
+  flex-direction: column;
+  gap: 8px;
   padding: 10px 0;
-  border-bottom: 1px solid var(--color-placeholder);
+  border-bottom: 1px solid var(--color-text);
 }
 
 .chart-line__image {
-  flex: none;
-  width: 81px;
-  height: 81px;
+  width: 48px;
+  height: 48px;
   background: var(--color-placeholder) center / cover no-repeat;
 }
 
-.chart-line__details {
+.chart-line__row {
   display: flex;
-  flex: 1;
-  flex-direction: column;
-  gap: 4px;
-  min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
 }
 
-.chart-line__details p {
+.chart-line p {
   margin: 0;
 }
 
-/* The quantity sits a little below the note, as in the design */
-.chart-line__details p:last-child {
-  margin-top: 4px;
+.chart-line__price {
+  text-align: right;
+  white-space: nowrap;
 }
 
-.chart-line__price {
-  flex: none;
-  padding: 10px 6px;
-  white-space: nowrap;
+.chart-line__note {
+  color: var(--color-muted);
+}
+
+.chart-line__note[hidden] {
+  display: none;
+}
+
+.chart-line__controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.chart-line__buttons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.icon-button {
+  display: flex;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+/* Quantity pill on this page is outlined, not filled */
+.chart-line__quantity {
+  display: flex;
+  width: 52px;
+  height: 32px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #eeeeef;
+  border-radius: 99px;
+}
+
+/* Back to the menu to add more */
+.chart__add {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  width: 178px;
+  height: 56px;
+  margin: 16px auto 0;
+  border-radius: 99px;
+  background: var(--color-field);
+  color: inherit;
+  text-decoration: none;
 }
 
 .chart__empty {
@@ -1258,7 +1325,7 @@ html.sheet-open {
   gap: 8px;
   max-width: 402px;
   margin: 0 auto;
-  padding: 24px 16px calc(32px + env(safe-area-inset-bottom));
+  padding: 16px 16px calc(16px + env(safe-area-inset-bottom));
   border-radius: 16px 16px 0 0;
   background: var(--color-header);
 }
@@ -1280,7 +1347,7 @@ html.sheet-open {
 
 .order-panel__button {
   height: 56px;
-  border: 0;
+  border: 1px solid var(--color-text);
   border-radius: 99px;
   background: #25d366;      /* WhatsApp green */
   color: inherit;
