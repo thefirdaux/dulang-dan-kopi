@@ -1,1 +1,4 @@
 .DS_Store
+
+# Original photo uploads; the site uses the cropped copies in assets/menu/
+Desserts/

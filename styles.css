@@ -884,7 +884,7 @@ html.nav-open {
 .menu-card__image {
   aspect-ratio: 1;
   margin-bottom: 12px;
-  background: var(--color-placeholder);
+  background: var(--color-placeholder) center / cover no-repeat;
 }
 
 .menu-card__code {
