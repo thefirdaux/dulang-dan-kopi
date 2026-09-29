@@ -101,9 +101,11 @@
   // While searching, a chip jumps to its category instead of changing tab
   const goTo = (index) => {
     if (panels[index].hidden) return;
-    const bar = document.querySelector('.menu__bar');
+    const height = (el) => (el ? el.offsetHeight : 0);
+    // The header and the search bar both stick to the top, so clear both
+    const sticky = height(document.querySelector('.site-header')) + height(document.querySelector('.menu__bar'));
     const top = panels[index].getBoundingClientRect().top + window.scrollY;
-    window.scrollTo({ top: Math.max(0, top - (bar ? bar.offsetHeight : 0) - 8) });
+    window.scrollTo({ top: Math.max(0, top - sticky - 8) });
   };
 
   const select = (index, { focus = false, scroll = true } = {}) => {
