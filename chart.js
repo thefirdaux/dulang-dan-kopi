@@ -109,8 +109,20 @@
         `RM ${money(item.price * item.quantity)}`,
       ];
     });
+    // Always the shop's own clock, whatever the customer's phone is set to
+    const when = new Date().toLocaleString('ms-MY', {
+      timeZone: 'Asia/Kuala_Lumpur',
+      weekday: 'long',
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+      hour: 'numeric',
+      minute: '2-digit',
+    });
+
     return [
       `Tempahan Dulang&Kopi #${Cart.orderNo()}`,
+      when,
       '',
       ...lines,
       '',
