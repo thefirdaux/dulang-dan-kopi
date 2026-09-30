@@ -10,6 +10,9 @@
   --color-highlight: #f9e8e8;   /* matched letters in menu search */
   --color-muted: #8d8b8b;
 
+  /* Raised white surfaces: the availability notice and the menu cards */
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.06), 0 4px 12px rgb(0 0 0 / 0.08);
+
   --drawer-width: 209px;
   --nav-overhang: 120px;    /* how far the drawer reaches past the screen edges (see .nav-backdrop) */
 
@@ -877,7 +880,7 @@ html.nav-open {
   padding: 12px 16px;
   border-radius: 8px;
   background: #fff;
-  box-shadow: 0 1px 2px rgb(0 0 0 / 0.06), 0 4px 12px rgb(0 0 0 / 0.08);
+  box-shadow: var(--shadow-card);
 }
 
 .menu-notice img {
@@ -919,7 +922,7 @@ html.nav-open {
   padding: 12px 8px;
   border-radius: 8px;
   background: #fff;
-  box-shadow: 0 1px 2px rgb(0 0 0 / 0.06), 0 4px 12px rgb(0 0 0 / 0.08);
+  box-shadow: var(--shadow-card);
 }
 
 .menu-card__image {

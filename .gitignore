@@ -1,35 +1,13 @@
 .DS_Store
 
-# Original photo uploads; the site uses the cropped copies in assets/menu/
+# Photos are dropped in the project root, cropped into assets/menu/ and the
+# original left behind. The leading slash keeps these from also matching the
+# copies inside assets/ (git on macOS matches ignore rules case-insensitively).
 Desserts/
-/Asam_Pedas_Ikan_Pari*.jpg
-/Asam Pedas Ikan Tenggiri.jpg
-/Ayam Masak Balado.jpg
-/Ikan kembung Masak Balado.jpg
-/Ikan_Keli_Balado.png_*.jpg
-/Terung_Balado.HEIC_*.jpg
-/Daging Salai Masak Lemak.jpg
-/Udang Galah Masak Lemak.jpg
-/Ayam Goreng Berempah .jpg
-/Ayam Goreng Kampung .jpg
-/Ayam Masak Kicap.jpg
-/Bawal Goreng Merecik.jpg
-/Bendi_Goreng_Telur_Bilis_Crispy.HEIC_*.jpg
-/SET_ULAM.jpg_*.jpg
-/Siput Sedut Masak Lemak.jpg
-/Budu Tempoyak.jpg
-/Sambal Petai Ikan Bilis.jpg
-/Nasi Goreng Kampung.jpg
-/Nasi Goreng Cina.jpg
-/Nasi Lemak Ayam.jpg
-/Lontong.jpg
-/Keropok Lekor.jpg
-/Lempeng.jpg
-/Telur Mata.jpg
-/Set Tempoyak A.jpg
-/Set Tempoyak B.jpg
-/Set Tempoyak C.jpg
-/Set Budu padu.jpg
-/Set Mek.jpg
-/Syawal Bawal Set A.jpg
-/Syawal Bawal Set B.jpg
+/*.jpg
+/*.jpeg
+/*.png
+/*.webp
+/*.avif
+/*.heic
+/*.HEIC
