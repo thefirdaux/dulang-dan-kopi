@@ -101,9 +101,13 @@
 
   // The order as a WhatsApp message
   const message = () => {
-    const lines = items.map((item) => {
+    // Each item takes two lines: what it is, then what it costs
+    const lines = items.flatMap((item) => {
       const note = item.note ? ` (${item.note})` : '';
-      return `• ${item.quantity} × ${item.name}${note} — RM ${money(item.price * item.quantity)}`;
+      return [
+        `* ${item.quantity} x ${item.name}${note}`,
+        `RM ${money(item.price * item.quantity)}`,
+      ];
     });
     return [
       `Tempahan Dulang&Kopi #${Cart.orderNo()}`,
