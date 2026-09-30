@@ -2,7 +2,7 @@
 (() => {
   // Put the shop's WhatsApp number here, digits only with country code,
   // e.g. '60123456789'. While it's empty the button stays disabled.
-  const WHATSAPP_NUMBER = '';
+  const WHATSAPP_NUMBER = '60176748362';
 
   const list = document.getElementById('chart-list');
   const empty = document.getElementById('chart-empty');
