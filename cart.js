@@ -1,5 +1,5 @@
 // Shared cart: kept for this browser tab, so it survives moving between the
-// menu and Your Chart and a refresh, and empties when the tab is closed.
+// menu and Your Order and a refresh, and empties when the tab is closed.
 window.Cart = (() => {
   const KEY = 'dnk-cart';
   const ORDER_KEY = 'dnk-order-no';
