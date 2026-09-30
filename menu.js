@@ -196,7 +196,7 @@
         els.counts[key].textContent = quantities[key];
         els.minus[key].disabled = quantities[key] <= (key === 'single' ? 1 : 0);
       }
-      els.total.textContent = `MYR ${totalPrice().toFixed(2)}`;
+      els.total.textContent = `RM ${totalPrice().toFixed(2)}`;
       // Nothing to add while every quantity is zero
       els.add.disabled = twoPrices() && quantities.hot + quantities.cold === 0;
     };

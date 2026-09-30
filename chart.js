@@ -83,7 +83,7 @@
     empty.hidden = items.length > 0;
     clear.disabled = items.length === 0;
     orderNo.textContent = items.length ? Cart.orderNo() : '—';
-    orderTotal.textContent = items.length ? `MYR${money(Cart.total(items))}` : 'MYR00.00';
+    orderTotal.textContent = items.length ? `RM${money(Cart.total(items))}` : 'RM00.00';
     send.disabled = !items.length || !WHATSAPP_NUMBER;
   };
 
@@ -103,14 +103,14 @@
   const message = () => {
     const lines = items.map((item) => {
       const note = item.note ? ` (${item.note})` : '';
-      return `• ${item.quantity} × ${item.name}${note} — MYR ${money(item.price * item.quantity)}`;
+      return `• ${item.quantity} × ${item.name}${note} — RM ${money(item.price * item.quantity)}`;
     });
     return [
       `Tempahan Dulang&Kopi #${Cart.orderNo()}`,
       '',
       ...lines,
       '',
-      `Jumlah: MYR ${money(Cart.total(items))}`,
+      `Jumlah: RM ${money(Cart.total(items))}`,
     ].join('\n');
   };
 
