@@ -167,6 +167,7 @@
     const els = {
       code: el('sheet-code'),
       name: el('sheet-name'),
+      description: el('sheet-description'),
       image: el('sheet-image'),
       note: el('sheet-note'),
       total: el('sheet-total'),
@@ -208,9 +209,12 @@
         price: Number(card.dataset.price ?? card.querySelector('.menu-card__amount').textContent),
         priceCold: card.dataset.priceCold ? Number(card.dataset.priceCold) : null,
         image: card.querySelector('.menu-card__image').style.backgroundImage || '',
+        description: card.dataset.description || '',
       };
       els.code.textContent = chosen.code;
       els.name.textContent = chosen.name;
+      // Items without a description keep Figma's placeholder line
+      els.description.textContent = chosen.description || 'Food Description';
       els.image.style.backgroundImage = chosen.image;
       els.note.value = '';
       quantities = { single: 1, hot: 0, cold: 0 };
