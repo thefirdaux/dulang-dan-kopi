@@ -158,8 +158,8 @@
   }
 
   // ---- Add to Cart sheet ----------------------------------------------
-  // Plain items have one Amount row (Figma 129:3303). Drinks sold hot and cold
-  // have an Amount (Hot) and an Amount (Cold) row, both starting at 0 (137:3464).
+  // Plain items have one Quantity row (Figma 129:3303). Drinks sold hot and cold
+  // have a Quantity (Hot) and a Quantity (Cold) row, both starting at 0 (137:3464).
   const sheet = document.getElementById('item-sheet');
   if (sheet) {
     const backdrop = document.getElementById('sheet-backdrop');
@@ -197,7 +197,7 @@
         els.minus[key].disabled = quantities[key] <= (key === 'single' ? 1 : 0);
       }
       els.total.textContent = `MYR ${totalPrice().toFixed(2)}`;
-      // Nothing to add while every amount is zero
+      // Nothing to add while every quantity is zero
       els.add.disabled = twoPrices() && quantities.hot + quantities.cold === 0;
     };
 
