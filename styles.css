@@ -426,6 +426,14 @@ html.nav-open {
   cursor: pointer;
 }
 
+/* The build this page is running (nav.js fills it in) */
+.site-nav__build {
+  flex: none;
+  margin: 12px 0 0;
+  padding: 0 8px;
+  color: var(--color-muted);
+}
+
 /* Hero */
 /* Titles and illustration share one grid cell, so the image always starts 70px
    below the header no matter how tall the text gets on small screens. */

@@ -46,4 +46,14 @@
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && isOpen()) setOpen(false);
   });
+
+  // Which build this page is running, so a cached copy is easy to spot. It
+  // reads the ?v= tag the HTML already carries, so there's nothing to keep
+  // in step by hand.
+  const build = document.getElementById('build-version');
+  if (build) {
+    const stylesheet = document.querySelector('link[rel="stylesheet"]');
+    const version = stylesheet && stylesheet.getAttribute('href').match(/[?&]v=([0-9a-z]+)/);
+    build.textContent = version ? `Versi ${version[1]}` : '';
+  }
 })();
